@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane styleClass="background" stylesheets="@Dark.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.SignUpDialogController">
+   <top>
+      <StackPane prefHeight="0.0" prefWidth="600.0" styleClass="context-menu" stylesheets="@Dark.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="83.0" prefWidth="237.0" styleClass="label-header" stylesheets="@Dark.css" text="Sign Up">
+               <font>
+                  <Font size="54.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.6667022705078" minWidth="0.0" prefWidth="102.00002034505208" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.33333333333326" minWidth="9.666631062825445" prefWidth="247.33331298828125" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <children>
+                  <Label text="Email *">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <TextField fx:id="email" prefHeight="8.0" prefWidth="285.0" style="-fx-background-radius: 10;" styleClass="context-menu" GridPane.columnIndex="1" />
+            <StackPane GridPane.rowIndex="1">
+               <children>
+                  <Label text="Nickname *">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <TextField fx:id="nickname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <StackPane GridPane.rowIndex="2">
+               <children>
+                  <Label text="Last Name">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <StackPane GridPane.rowIndex="3">
+               <children>
+                  <Label text="First Name">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane GridPane.rowIndex="4">
+               <children>
+                  <Label text="About Me">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="aboutMe" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="30.0" right="75.0" top="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
+   <bottom>
+      <StackPane prefHeight="35.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleOk" styleClass="button-action" text="OK">
+               <StackPane.margin>
+                  <Insets right="150.0" top="50.0" />
+               </StackPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="button-action" text="Cancel">
+               <StackPane.margin>
+                  <Insets left="150.0" top="50.0" />
+               </StackPane.margin>
+            </Button>
+            <Label fx:id="warningLabel" styleClass="label-warning" text="Warning" visible="false">
+               <StackPane.margin>
+                  <Insets top="-50.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="10.0" />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </BorderPane.margin>
+      </StackPane>
+   </bottom>
+   <left>
+      <AnchorPane prefHeight="312.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

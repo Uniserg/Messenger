@@ -1,0 +1,274 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#FF1d1d,20%); // your color here
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button {
+    -fx-background-color: #1d1d1d;
+}
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+.button:pressed {
+    /*-fx-background-color: derive(#352482, 50%);*/
+    -fx-background-color: #6541cf;
+    -fx-text-fill: #1d1d1d;
+}
+
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #b7b6ba;
+    /*-fx-text-fill: white;*/
+    /*-fx-opacity: 0.6;*/
+}
+
+.label-last-online {
+    -fx-font-size: 10pt;
+    -fx-font-family: Candara;
+    -fx-text-fill: #585858;
+    -fx-font-weight: bold;
+}
+
+.label-nickname {
+    -fx-font-size: 10pt;
+    -fx-font-family: Candara;
+    -fx-text-fill: #6541cf;
+    -fx-font-weight: bold;
+
+}
+
+.label-warning {
+    -fx-text-fill: #e92539;
+    -fx-font-size: 9pt;
+    -fx-font-style: italic;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #b7b6ba;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 48pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-middle {
+    -fx-font-size: 18pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-opacity: 1;
+}
+
+.label-close {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semilight";
+    -fx-text-fill: #e92539;
+    -fx-opacity: 1;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+            transparent
+            transparent
+            derive(-fx-base, 80%)
+            transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #b7b6ba;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+.split-pane {
+    -fx-padding: 1 0 0 0;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#1d1d1d,20%);
+}
+
+.context-menu {
+    /*-fx-background-color: derive(#1d1d1d,50%);*/
+    /*-fx-background-color: derive(#453396,50%);*/
+    /*-fx-background-color: derive(#352482, 50%);*/
+    -fx-background-color: #6541cf;
+}
+
+.text-field {
+    -fx-background-color: #2e2b3d;
+    -fx-background-radius: 10;
+    -fx-text-fill: #b7b6ba;
+    -fx-prompt-text-fill: #615b5b;
+    /*-fx-text-fill: #b7b6ba;*/
+}
+
+.menu-bar .label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #b7b6ba;
+    -fx-opacity: 0.9;
+}
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.button-action {
+    -fx-padding: 5 22 5 22;
+    /*-fx-border-color: #e2e2e2;*/
+    -fx-border-color: #b7b6ba;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    /*-fx-text-fill: #d8d8d8;*/
+    -fx-text-fill: #b7b6ba;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button-action:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button-action:pressed, .button:default:hover:pressed {
+    /*-fx-background-color: #0096C9;*/
+    /*-fx-background-color: derive(#352482, 50%);*/
+    -fx-background-color: #6541cf;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button-action:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button-action:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button-action:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: white;
+}
+
+.button-action:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
+
+.chat:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.chat:pressed {
+    /*-fx-background-color: #0096C9;*/
+    /*-fx-background-color: derive(#352482, 50%);*/
+    -fx-background-color: #6541cf;
+    -fx-text-fill: #1d1d1d;
+}
+
+.menu {
+    -fx-background-color: #2e2b3d;
+}
+
+.button-menu {
+    -fx-background-color: #2e2b3d;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.button-close {
+    -fx-background-color: #2e2b3d;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0
+}
+
+.button-close:hover {
+    -fx-background-color: #e92539;
+    -fx-image: white;
+}
+
+.menu .label
+{
+    -fx-text-fill: black;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #6541cf;
+    -fx-padding: 5;
+    -fx-background-insets: 0;
+}
+.radio-button:focused {
+    -fx-border-color: #6541cf;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+}
+
+/*.user-menu {*/
+/*    -fx-opacity: 0;*/
+/*}*/
+
+/*.user-menu:pressed {*/
+/*    -fx-opacity: 1;*/
+/*    -fx-animated: show 3s 1;*/
+    /*transition: 1s; !*Скорость перехода состояния элемента*!*/
+    /*animation: show 3s 1; !* Указываем название анимации, её время и количество повторов*!*/
+    /*animation-fill-mode: forwards; !* Чтобы элемент оставался в конечном состоянии анимации *!*/
+    /*animation-delay: 1s; !* Задержка перед началом *!*/
+/*}*/
+
+/*.button-list:pressed {*/
+/*    -fx-background-color: #3a3a3a;*/
+/*}*/

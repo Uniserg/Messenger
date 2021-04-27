@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane stylesheets="@Dark.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.RootSceneController">
+   <top>
+      <AnchorPane maxHeight="17.0" minHeight="17.0" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #2e2b3d;" stylesheets="@Dark.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="564.0" layoutY="-4.0" mnemonicParsing="false" onAction="#close" prefHeight="15.0" prefWidth="30.0" styleClass="button-close" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="11.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/cross.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="turnButton" disable="true" graphicTextGap="0.0" layoutX="530.0" layoutY="-3.0" mnemonicParsing="false" onAction="#turn" prefHeight="10.0" prefWidth="30.0" styleClass="button-menu" visible="false" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/turn.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="478.0" layoutY="-2.0" mnemonicParsing="false" onAction="#rollUp" prefHeight="10.0" prefWidth="30.0" styleClass="button-menu" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/minus.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="maximizeButton" layoutX="308.0" layoutY="1.0" mnemonicParsing="false" onAction="#maximize" prefHeight="10.0" prefWidth="30.0" styleClass="button-menu" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <graphic>
+                  <ImageView fitHeight="12.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/maximize.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

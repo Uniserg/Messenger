@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="450.0" minWidth="370.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.UserChatMenuController">
+   <children>
+      <AnchorPane fx:id="userChatMenu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="506.0" prefWidth="422.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="370.6666666666667" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox prefHeight="450.0" prefWidth="370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                           <children>
+                              <ScrollPane fitToHeight="true" hbarPolicy="NEVER" hmax="0.0" maxWidth="370.0" pannable="true" prefHeight="450.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" vbarPolicy="NEVER">
+                                 <content>
+                                    <VBox maxWidth="370.0" minWidth="370.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" />
+                                 </content>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="370.0" prefHeight="100.0" prefWidth="370.0">
+                           <children>
+                              <TextField layoutX="72.0" layoutY="17.0" prefHeight="37.0" prefWidth="265.0" promptText="Search..." />
+                              <Button layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#showUserMenu" prefHeight="49.0" prefWidth="53.0" stylesheets="@Dark.css">
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icons/Hamburger_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane style="-fx-background-color: #2b2b2b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="userMenu" layoutX="-320.0" maxWidth="320.0" minWidth="320.0" prefHeight="450.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-320.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="100.0" minHeight="100.0" prefHeight="100.0" prefWidth="320.0" styleClass="context-menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Circle fx:id="circleAvatarInUserMenu" fill="#352482" layoutX="60.0" layoutY="50.0" radius="30.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Label fx:id="usernameLabel" layoutX="103.0" layoutY="39.0" text="Username" />
+               </children>
+            </AnchorPane>
+            <VBox layoutX="54.0" layoutY="100.0" prefHeight="350.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showFriendsMenu">
+                     <graphic>
+                        <AnchorPane prefHeight="50.0" prefWidth="320.0">
+                           <children>
+                              <Label layoutX="64.0" layoutY="18.0" stylesheets="@Dark.css" text="Friends" />
+                              <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/friends1.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showSettings">
+                     <graphic>
+                        <AnchorPane prefHeight="50.0" prefWidth="320.0">
+                           <children>
+                              <Label layoutX="64.0" layoutY="18.0" stylesheets="@Dark.css" text="Settings" />
+                              <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/settings.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleLogout">
+                     <graphic>
+                        <AnchorPane prefHeight="50.0" prefWidth="320.0">
+                           <children>
+                              <Label layoutX="64.0" layoutY="18.0" stylesheets="@Dark.css" text="Logout" />
+                              <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="friendsMenu" layoutX="371.0" layoutY="21.0" prefHeight="455.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="-320.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <AnchorPane prefHeight="80.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="387.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TextField fx:id="searchUserTextField" layoutX="44.0" layoutY="14.0" onKeyPressed="#handleEnterPressed" prefHeight="37.0" prefWidth="206.0" promptText="Search..." />
+                  <Button layoutX="258.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSearchUsers" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                           <image>
+                              <Image url="@icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Line endX="218.0" fill="#6541cf" layoutX="101.0" layoutY="78.0" startX="-100.0" stroke="#6541cf" strokeWidth="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0" />
+                  <Label fx:id="searchUserWarning" layoutX="101.0" layoutY="56.0" styleClass="label-warning" text="No user was found" textFill="#a03737" visible="false" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="80.0" prefHeight="386.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="320.0" styleClass="background" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <content>
+                        <VBox fx:id="userChartBox" minHeight="294.0" minWidth="320.0" prefHeight="294.0" prefWidth="320.0" styleClass="background" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="settingsMenu" layoutX="-381.0" prefWidth="370.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="-0.7879893183708191" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane layoutX="1.1213226616382599" prefHeight="506.0" prefWidth="376.6666666666667" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="85.0" layoutY="27.0" prefHeight="150.0" prefWidth="375.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Circle fx:id="circleAvatarInSettings" fill="#6541cf" layoutX="52.0" layoutY="98.0" radius="36.0" stroke="#6541cf" strokeType="INSIDE" />
+                              <Label fx:id="usernameInSettingsLabel" layoutX="102.0" layoutY="67.0" stylesheets="@Dark.css" text="Full name" />
+                              <Label layoutX="103.0" layoutY="98.0" text="Date online" />
+                              <Line endX="269.95953369140625" endY="-7.62939453125E-6" fill="#6541cf" layoutX="101.0" layoutY="152.0" startX="-100.0" stroke="#6541cf" strokeWidth="3.0" AnchorPane.leftAnchor="-1.1213226318359375" AnchorPane.rightAnchor="2.252507527669252" />
+                              <Button layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleCancelSettings" prefHeight="4.0" prefWidth="2.0" AnchorPane.leftAnchor="10.0">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                                       <image>
+                                          <Image url="@icons/back.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="59.0" layoutY="15.0" prefHeight="21.0" prefWidth="75.0" text="Settings" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="153.0" prefHeight="357.0" prefWidth="375.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="154.0">
+                           <children>
+                              <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hmax="0.0" prefHeight="371.0" prefWidth="374.6666666666667" styleClass="background" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox prefHeight="309.0" prefWidth="373.0" styleClass="background">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showEditProfile">
+                                             <graphic>
+                                                <AnchorPane prefHeight="60.0" prefWidth="370.0">
+                                                   <children>
+                                                      <Label layoutX="58.0" layoutY="19.0" text="Edit Profile" />
+                                                      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@icons/info.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </graphic>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#showEditPrivacy">
+                                             <graphic>
+                                                <AnchorPane prefHeight="60.0" prefWidth="370.0">
+                                                   <children>
+                                                      <Label layoutX="58.0" layoutY="19.0" text="Privacy" />
+                                                      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@icons/lock.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </graphic>
+                                          </Button>
+                                          <Button layoutX="10.0" layoutY="78.0" mnemonicParsing="false" onAction="#showSessions">
+                                             <graphic>
+                                                <AnchorPane prefHeight="60.0" prefWidth="370.0">
+                                                   <children>
+                                                      <Label layoutX="58.0" layoutY="19.0" text="Sessions" />
+                                                      <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@icons/sessions.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editProfileMenu" layoutX="-380.0" maxWidth="340.0" minWidth="340.0" prefHeight="506.0" prefWidth="340.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="506.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" hmax="0.0" maxWidth="350.0" minWidth="350.0" prefWidth="350.0" styleClass="background" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
+                     <content>
+                        <AnchorPane fx:id="editProfileScrollPane" maxWidth="370.0" minWidth="370.0" prefWidth="370.0">
+                           <children>
+                              <VBox maxWidth="370.0" minWidth="370.0" prefHeight="430.6666666666667" prefWidth="370.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane maxWidth="370.0" minWidth="370.0" prefHeight="160.0" prefWidth="369.0" style="-fx-background-color: #2e2b3d;">
+                                       <children>
+                                          <Circle fx:id="circleAvatarInEditMenu" fill="#6541cf" layoutX="185.0" layoutY="54.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                                          <Button layoutX="140.0" layoutY="113.0" mnemonicParsing="false" onAction="#handleChoosePhoto" style="-fx-background-color: #6541cf; -fx-text-fill: #b7b6ba;" text="Choose Photo" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                    <Button maxWidth="370.0" minWidth="370.0" mnemonicParsing="false" onAction="#showEditUsername" prefWidth="370.0">
+                                       <graphic>
+                                          <AnchorPane prefWidth="370.0">
+                                             <children>
+                                                <Label layoutX="35.0" text="Name" AnchorPane.topAnchor="0.0">
+                                                   <padding>
+                                                      <Insets bottom="10.0" top="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="usernameEditLabel" layoutX="151.0" layoutY="10.0" />
+                                             </children>
+                                          </AnchorPane>
+                                       </graphic>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="170.0" maxWidth="370.0" minWidth="370.0" mnemonicParsing="false" prefWidth="370.0">
+                                       <graphic>
+                                          <AnchorPane maxWidth="370.0" minWidth="370.0" prefWidth="370.0">
+                                             <children>
+                                                <Label layoutX="44.0" text="Email" AnchorPane.topAnchor="0.0">
+                                                   <padding>
+                                                      <Insets bottom="10.0" top="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="emailInSettingsLabel" layoutX="151.0" layoutY="10.0" text="email" />
+                                             </children>
+                                          </AnchorPane>
+                                       </graphic>
+                                    </Button>
+                                    <Button layoutX="10.0" layoutY="219.0" maxWidth="370.0" minWidth="370.0" mnemonicParsing="false" onAction="#showEditAboutMe" prefWidth="370.0">
+                                       <graphic>
+                                          <AnchorPane prefWidth="370.0">
+                                             <children>
+                                                <Label layoutX="35.0" text="About Me" AnchorPane.topAnchor="0.0">
+                                                   <padding>
+                                                      <Insets bottom="10.0" top="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label fx:id="aboutMeInSettingsLabel" layoutX="151.0" layoutY="10.0" text="about me" />
+                                             </children>
+                                          </AnchorPane>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+                  <AnchorPane maxHeight="350.0" minWidth="350.0" prefHeight="60.0" prefWidth="350.0" styleClass="background">
+                     <children>
+                        <Button fx:id="backEditProfileButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCancelEditProfile" prefHeight="4.0" prefWidth="2.0">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="83.0" layoutY="19.0" text="Information" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editUsernameDialog" layoutX="-370.0" layoutY="50.0" maxHeight="400.0" maxWidth="330.0" minHeight="340.0" minWidth="330.0" prefHeight="375.0" prefWidth="330.0" style="-fx-border-color: #6541cf;" styleClass="background" stylesheets="@Dark.css">
+         <children>
+            <TextField fx:id="lastNameTextField" layoutX="62.0" layoutY="83.0" />
+            <TextField fx:id="firstNameTextField" layoutX="62.0" layoutY="165.0" />
+            <Label layoutX="93.0" layoutY="61.0" text="Last Name" />
+            <Label layoutX="93.0" layoutY="143.0" text="First Name" />
+            <Button layoutX="72.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleSaveEditUsername" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Save">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button layoutX="176.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleCancelEditUsernameDialog" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Cancel">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editAboutMeDialog" layoutX="-370.0" layoutY="50.0" maxHeight="400.0" maxWidth="330.0" minHeight="340.0" minWidth="330.0" prefHeight="375.0" prefWidth="330.0" style="-fx-border-color: #6541cf;" styleClass="background" stylesheets="@Dark.css">
+         <children>
+            <TextField fx:id="aboutMeTextField" layoutX="62.0" layoutY="162.0" />
+            <Label layoutX="84.0" layoutY="140.0" text="About Me" />
+            <Button layoutX="72.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleSaveEditAboutMe" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Save">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button layoutX="176.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleCancelEditAboutMeDialog" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Cancel">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editPrivacyDialog" layoutX="-345.0" layoutY="75.0" prefHeight="375.0" prefWidth="265.0" styleClass="background" stylesheets="@Dark.css">
+         <children>
+            <Line endX="218.0" fill="#6541cf" layoutX="101.0" layoutY="57.0" startX="-100.0" stroke="#6541cf" strokeWidth="2.0" />
+            <Label layoutX="75.0" layoutY="8.0" text="Edit privacy" />
+            <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleCancelEditPrivacy" prefHeight="4.0" prefWidth="2.0">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                     <image>
+                        <Image url="@icons/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="20.0" layoutY="76.0" text="Messages From Friends" />
+            <Label layoutX="20.0" layoutY="121.0" text="Invisible" />
+            <Label layoutX="20.0" layoutY="166.0" text="Show last online" />
+            <RadioButton fx:id="invisibleRadioButton" layoutX="238.0" layoutY="123.0" mnemonicParsing="false" />
+            <RadioButton fx:id="showLastOnlineRadioButton" layoutX="238.0" layoutY="162.0" mnemonicParsing="false" />
+            <RadioButton fx:id="messageFromFriendsOnlyRadioButton" layoutX="238.0" layoutY="78.0" mnemonicParsing="false" />
+            <Button layoutX="52.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleSaveEditPrivacy" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Save">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Button layoutX="176.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleCancelEditPrivacy" prefHeight="40.0" prefWidth="91.0" styleClass="button-action" text="Cancel">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="foundUserInfoMenu" focusTraversable="true" maxHeight="506.0" maxWidth="370.0" minHeight="506.0" minWidth="370.0" prefHeight="506.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.rightAnchor="-370.0">
+         <children>
+            <Line endX="259.6666564941406" endY="-7.62939453125E-6" fill="#6541cf" layoutX="111.0" layoutY="118.0" startX="-111.00000762939453" startY="-7.62939453125E-6" stroke="#6541cf" strokeWidth="2.0" />
+            <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="30.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+               <image>
+                  <Image url="@icons/back.png" />
+               </image>
+            </ImageView>
+            <Circle fx:id="foundUserInfoAvatar" fill="#6541cf" layoutX="111.0" layoutY="54.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Label fx:id="foundUserInfoFullname" layoutX="177.0" layoutY="20.0" text="Full Name" />
+            <Label fx:id="foundUserInfoLastOnline" layoutX="177.0" layoutY="45.0" prefHeight="17.0" prefWidth="67.0" styleClass="label-last-online" stylesheets="@Dark.css" text="Last Online" />
+            <Label fx:id="foundUserInfoNickname" layoutX="287.0" layoutY="85.0" styleClass="label-nickname" text="\@Nickname" />
+            <Button layoutX="56.0" layoutY="158.0" mnemonicParsing="false" text="Write Message" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="sessionsMenu" layoutX="-381.0" prefHeight="506.0" prefWidth="352.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="2.0" layoutY="29.0" prefHeight="72.0" prefWidth="369.0" styleClass="context-menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="88.0" layoutY="12.0" prefHeight="35.0" prefWidth="117.0" style="-fx-text-fill: #b7b6ba;" styleClass="label-middle" text="Sessions">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="28.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCancelSessionWindow" prefHeight="4.0" prefWidth="2.0" style="-fx-background-colr: #6541cf;">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                           <image>
+                              <Image url="@icons/back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <Label layoutX="33.0" layoutY="83.0" text="This session" />
+            <AnchorPane layoutY="111.0" prefHeight="90.0" prefWidth="371.0" styleClass="menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label fx:id="currentSessionLastOnline" layoutX="200.0" layoutY="35.0" text="Last Online" />
+                  <Label fx:id="deviceAndOs" layoutX="14.0" layoutY="14.0" text="Device + os" />
+                  <Label fx:id="signInFirstTime" layoutX="14.0" layoutY="55.0" text="Sign in time first" />
+                  <Label fx:id="ipAndLocation" layoutX="14.0" layoutY="34.0" text="Ip + location" />
+               </children>
+            </AnchorPane>
+            <Button alignment="BASELINE_LEFT" layoutY="201.0" mnemonicParsing="false" onAction="#handleDeleteAllOtherSessions" prefHeight="49.0" prefWidth="372.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <graphic>
+                  <Label styleClass="label-close" stylesheets="@Dark.css" text="Exit from all other sessions" />
+               </graphic>
+               <padding>
+                  <Insets left="33.0" />
+               </padding>
+            </Button>
+            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="33.0" layoutY="263.0" maxHeight="253.0" maxWidth="352.0" minWidth="352.0" prefHeight="240.0" prefWidth="352.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="266.0">
+               <content>
+                  <VBox fx:id="sessionsChartBox" cache="true" spacing="3.0" styleClass="background">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
