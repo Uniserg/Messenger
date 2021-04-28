@@ -16,6 +16,7 @@ public class SocketMessage implements Serializable {
         UPDATE_TRACKING_USER,
         ADD_NEW_SESSION,
         DELETE_ALL_OTHER_SESSIONS,
+        DELETE_OTHER_SESSION
     }
 
     @Serial

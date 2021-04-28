@@ -14,10 +14,12 @@ public class CustomWindow {
     private double coordinate;
 
 
-    public CustomWindow(Pane window, double coordinate, CustomWindow child) {
+    public CustomWindow(Pane window, double coordinate, CustomWindow parent) {
         this.coordinate = coordinate;
         this.window = window;
-        this.child = child;
+
+        if (parent != null)
+            setParent(parent);
     }
 
     public CustomWindow(Pane window, Runnable cancelSpecFunc) {
@@ -33,12 +35,26 @@ public class CustomWindow {
     }
 
     public void showWindow() {
+        System.out.println("ПОКАЗЫВАЕМ ОКОЩКЛ");
         moveObject(-coordinate);
+
+        Pane parentPane = parent.getWindow();
+
+        parentPane.getChildren().get(0).setDisable(true);
+        parentPane.getChildren().get(0).setOpacity(0.9);
+        parent.setChild(this);
+
+        parentPane.setOnMouseClicked(mouseEvent -> {
+            this.cancelWindow();
+            parentPane.setOnMouseClicked(null);
+        });
     }
 
 
     public void cancelWindow() {
+        System.out.println("CANCEL WINDOW");
         moveObject(coordinate);
+
         parent.free();
 
 
@@ -57,14 +73,17 @@ public class CustomWindow {
     }
 
     public void setChild(CustomWindow child) {
-        window.getChildren().get(0).setDisable(true);
-        window.getChildren().get(0).setOpacity(0.9);
-        child.setParent(this);
+//        window.getChildren().get(0).setDisable(true);
+//        window.getChildren().get(0).setOpacity(0.9);
+//        child.setParent(this);
         this.child = child;
     }
 
     public void setParent(CustomWindow parent) {
         this.parent = parent;
+
+        //////////////////////////////
+        //////////////////////////////////
     }
 
     public void free() {

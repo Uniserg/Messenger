@@ -3,10 +3,10 @@ package com.serguni.messenger.components;
 import com.serguni.messenger.controllers.UserChatMenuController;
 import com.serguni.messenger.dto.models.SessionDto;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class SessionChart implements Tracking {
-    private int id;
     private AnchorPane sessionPane;
     private final Label deviceAndOs;
     private final Label ipAndLocation;
@@ -16,6 +16,8 @@ public class SessionChart implements Tracking {
     private SessionDto sessionInfo;
 
     public SessionChart(SessionDto sessionDto, UserChatMenuController userChatMenuController) {
+        this.sessionInfo = sessionDto;
+
         sessionPane = new AnchorPane();
 
         deviceAndOs = new Label();
@@ -44,9 +46,19 @@ public class SessionChart implements Tracking {
         sessionPane.setStyle("-fx-background-color: #1d1d1d");
         sessionPane.getChildren().addAll(deviceAndOs, ipAndLocation, lastOnline, signInFirst);
 
-        sessionPane.setOnMouseClicked(mouseEvent -> userChatMenuController.showConfirmDeleteSessionDialog(this));
+
+        sessionPane.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            userChatMenuController.showConfirmDeleteSessionDialog(this);
+        });
+
+
         sessionPane.setOnMouseEntered(e -> sessionPane.setStyle("-fx-background-color: #3a3a3a"));
         sessionPane.setOnMouseExited(e -> sessionPane.setStyle("-fx-background-color: #1d1d1d"));
+
+//        sessionButton = new Button();
+//        sessionButton.getChildrenUnmodifiable().add(sessionPane);
+//
+//        sessionButton.setOnAction(mouseEvent -> userChatMenuController.showConfirmDeleteSessionDialog(this));
     }
 
     @Override

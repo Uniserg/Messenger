@@ -401,51 +401,72 @@
             <Button layoutX="56.0" layoutY="158.0" mnemonicParsing="false" text="Write Message" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sessionsMenu" layoutX="-381.0" prefHeight="506.0" prefWidth="352.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="sessionsMenu" layoutX="-393.0" layoutY="-4.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="2.0" layoutY="29.0" prefHeight="72.0" prefWidth="369.0" styleClass="context-menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="12.0" layoutY="4.0" prefHeight="510.0" prefWidth="364.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="88.0" layoutY="12.0" prefHeight="35.0" prefWidth="117.0" style="-fx-text-fill: #b7b6ba;" styleClass="label-middle" text="Sessions">
+                  <AnchorPane layoutX="2.0" layoutY="29.0" prefHeight="72.0" prefWidth="369.0" styleClass="context-menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="88.0" layoutY="12.0" prefHeight="35.0" prefWidth="117.0" style="-fx-text-fill: #b7b6ba;" styleClass="label-middle" text="Sessions">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="28.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCancelSessionWindow" prefHeight="4.0" prefWidth="2.0" style="-fx-background-colr: #6541cf;">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                                 <image>
+                                    <Image url="@icons/back.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="33.0" layoutY="83.0" text="This session" />
+                  <AnchorPane layoutY="111.0" prefHeight="90.0" prefWidth="371.0" styleClass="menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Label fx:id="currentSessionLastOnline" layoutX="200.0" layoutY="35.0" text="Last Online" />
+                        <Label fx:id="deviceAndOs" layoutX="14.0" layoutY="14.0" text="Device + os" />
+                        <Label fx:id="signInFirstTime" layoutX="14.0" layoutY="55.0" text="Sign in time first" />
+                        <Label fx:id="ipAndLocation" layoutX="14.0" layoutY="34.0" text="Ip + location" />
+                     </children>
+                  </AnchorPane>
+                  <Button alignment="BASELINE_LEFT" layoutY="201.0" mnemonicParsing="false" onAction="#handleDeleteAllOtherSessions" prefHeight="49.0" prefWidth="372.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <graphic>
+                        <Label styleClass="label-close" stylesheets="@Dark.css" text="Exit from all other sessions" />
+                     </graphic>
+                     <padding>
+                        <Insets left="33.0" />
+                     </padding>
+                  </Button>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="33.0" layoutY="263.0" maxHeight="253.0" maxWidth="352.0" minWidth="352.0" prefHeight="240.0" prefWidth="352.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="266.0">
+                     <content>
+                        <VBox fx:id="sessionsChartBox" cache="true" spacing="3.0" styleClass="background">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="confirmDeleteSessionDialog" layoutX="-290.0" layoutY="150.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="281.3333333333333" style="-fx-border-color: #2b2b2b; -fx-border-width: 3;" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="14.0" styleClass="label-middle" text="Close Session">
                      <font>
-                        <Font size="1.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="28.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleCancelSessionWindow" prefHeight="4.0" prefWidth="2.0" style="-fx-background-colr: #6541cf;">
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
-                           <image>
-                              <Image url="@icons/back.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <Label layoutX="10.0" layoutY="66.0" prefHeight="21.0" prefWidth="265.0" text="You definitely want to end this session?" />
+                  <Button layoutX="80.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleCancelConfirmDialog" styleClass="button-cancel" text="Cancel" />
+                  <Button layoutX="157.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleCloseSession" styleClass="button-close-event" text="Close" />
                </children>
             </AnchorPane>
-            <Label layoutX="33.0" layoutY="83.0" text="This session" />
-            <AnchorPane layoutY="111.0" prefHeight="90.0" prefWidth="371.0" styleClass="menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <Label fx:id="currentSessionLastOnline" layoutX="200.0" layoutY="35.0" text="Last Online" />
-                  <Label fx:id="deviceAndOs" layoutX="14.0" layoutY="14.0" text="Device + os" />
-                  <Label fx:id="signInFirstTime" layoutX="14.0" layoutY="55.0" text="Sign in time first" />
-                  <Label fx:id="ipAndLocation" layoutX="14.0" layoutY="34.0" text="Ip + location" />
-               </children>
-            </AnchorPane>
-            <Button alignment="BASELINE_LEFT" layoutY="201.0" mnemonicParsing="false" onAction="#handleDeleteAllOtherSessions" prefHeight="49.0" prefWidth="372.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <graphic>
-                  <Label styleClass="label-close" stylesheets="@Dark.css" text="Exit from all other sessions" />
-               </graphic>
-               <padding>
-                  <Insets left="33.0" />
-               </padding>
-            </Button>
-            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="33.0" layoutY="263.0" maxHeight="253.0" maxWidth="352.0" minWidth="352.0" prefHeight="240.0" prefWidth="352.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="266.0">
-               <content>
-                  <VBox fx:id="sessionsChartBox" cache="true" spacing="3.0" styleClass="background">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets></VBox>
-               </content>
-            </ScrollPane>
          </children>
       </AnchorPane>
    </children>
