@@ -256,6 +256,20 @@
     -fx-border-width: 2;
 }
 
+.button-cancel {
+    -fx-text-fill: #6541cf;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 11pt;
+}
+
+.button-close-event {
+    -fx-text-fill: #ee686f;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 11pt;
+}
+
 /*.user-menu {*/
 /*    -fx-opacity: 0;*/
 /*}*/

@@ -12,7 +12,6 @@ import com.serguni.messenger.dto.models.UserInfoDto;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import com.serguni.messenger.Main;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -134,6 +133,8 @@ public class UserChatMenuController {
     //CONFIRM DELETE SESSION
     @FXML
     private AnchorPane confirmDeleteSessionDialog;
+    private long sessionOnDeleteId;
+
     //CONFIRM DELETE SESSION
 
 
@@ -158,15 +159,16 @@ public class UserChatMenuController {
     @FXML
     private void initialize() {
         userChatMenuWindow = new CustomWindow(userChatMenu, 0, null);
-        userMenuWindow = new CustomWindow(userMenu,-320, settingsWindow);
-        friendsWindow = new CustomWindow(friendsMenu, 345, null);
-        settingsWindow = new CustomWindow(settingsMenu, -380, null); // назначать
-        editProfileWindow = new CustomWindow(editProfileMenu, -380, null);
-        editUsernameDialogWindow = new CustomWindow(editUsernameDialog, -380, null);
-        editAboutMeDialogWindow = new CustomWindow(editAboutMeDialog, -380, null);
-        editPrivacyDialogWindow = new CustomWindow(editPrivacyDialog, -365, null);
-        foundUserInfoMenuWindow = new CustomWindow(foundUserInfoMenu, 345, null);
-        sessionsWindow = new CustomWindow(sessionsMenu, -381, null);
+        userMenuWindow = new CustomWindow(userMenu,-320, userChatMenuWindow);
+        friendsWindow = new CustomWindow(friendsMenu, 345, userChatMenuWindow);
+        settingsWindow = new CustomWindow(settingsMenu, -380, userMenuWindow);
+        editProfileWindow = new CustomWindow(editProfileMenu, -380, settingsWindow);
+        editUsernameDialogWindow = new CustomWindow(editUsernameDialog, -380, editProfileWindow);
+        editAboutMeDialogWindow = new CustomWindow(editAboutMeDialog, -380, editProfileWindow);
+        editPrivacyDialogWindow = new CustomWindow(editPrivacyDialog, -365, settingsWindow);
+        foundUserInfoMenuWindow = new CustomWindow(foundUserInfoMenu, 345, friendsWindow);
+        sessionsWindow = new CustomWindow(sessionsMenu, -381, settingsWindow);
+        confirmDeleteSessionWindow = new CustomWindow(confirmDeleteSessionDialog, -310, sessionsWindow);
 
     }
 
@@ -194,15 +196,25 @@ public class UserChatMenuController {
 
 
         emailInSettingsLabel.setText(main.user.getEmail());
-        updateUsernameAnywhere(main.user.getLastName(), main.user.getFirstName());
-        updateAboutMeAnyWhere(main.user.getAboutMe());
-        updateAvatarAnywhere(main.user.getAvatar());
+        updateUsernameAnywhere();
+        updateAboutMeAnyWhere();
+        updateAvatarAnywhere();
         updateConfigurationAnywhere(main.user.getConfiguration());
 
-        TRACKING_ELEMENT_COLLECTION.put(main.user.getId(), userInfo -> Platform.runLater(() ->{
-            UserInfoDto userInfoDto = (UserInfoDto) userInfo;
-            usernameLabel.setText(userInfoDto.getLastName() + " " + userInfoDto.getFirstName());
-        }));
+//        TRACKING_ELEMENT_COLLECTION.put(main.user.getId(), userInfo -> Platform.runLater(() ->{
+//            UserInfoDto userInfoDto = (UserInfoDto) userInfo;
+////
+//        }));
+    }
+
+    private void changeUsernameLabel() {
+        String nameLabel = main.user.getLastName() + " " + main.user.getFirstName();
+        System.out.println(nameLabel.equals(" "));
+        if (nameLabel.equals(" ")) {
+            usernameLabel.setText(main.user.getNickname());
+        } else {
+            usernameLabel.setText(nameLabel);
+        }
     }
 
     private void userChatMouseEvent(CustomWindow window) {
@@ -217,30 +229,14 @@ public class UserChatMenuController {
 
     @FXML
     private void showUserMenu() {
-
-        String nameLabel = main.user.getLastName() + " " + main.user.getFirstName();
-        if (nameLabel.equals(" ")) {
-            usernameLabel.setText(main.user.getNickname());
-        } else {
-            usernameLabel.setText(nameLabel);
-        }
-
         userMenuWindow.showWindow();
-        userChatMenuWindow.setChild(userMenuWindow);
-
-        userChatMenu.setOnMouseClicked(mouseEvent -> userChatMouseEvent(userMenuWindow));
+        userMenuWindow.setParent(userChatMenuWindow);
     }
 
     @FXML
     private void showFriendsMenu() {
         userMenuWindow.cancelWindow();
-
         friendsWindow.showWindow();
-        userChatMenuWindow.setChild(friendsWindow);
-
-        userChatMenu.setOnMouseClicked(mouseEvent -> {
-            userChatMouseEvent(friendsWindow);
-        });
     }
 
     @FXML
@@ -267,8 +263,6 @@ public class UserChatMenuController {
     @FXML
     private void showSessions() {
         sessionsWindow.showWindow();
-        settingsWindow.setChild(sessionsWindow);
-        settingsMenu.setOnMouseClicked(mouseEvent -> sessionsWindow.cancelWindow());
     }
 
     @FXML
@@ -276,16 +270,39 @@ public class UserChatMenuController {
         sessionsWindow.cancelWindow();
     }
 
-
     public void showConfirmDeleteSessionDialog(SessionChart sessionChart) {
-        FXMLLoader loader = new FXMLLoader();
+        Platform.runLater(() -> {
+            confirmDeleteSessionWindow.showWindow();
+            confirmDeleteSessionWindow.setParent(sessionsWindow);
+
+            sessionOnDeleteId = sessionChart.getSessionInfo().getId();
+        });
+    }
+
+    public void deleteOtherSession(long deletedSessionId) {
+        Platform.runLater(() -> {
+            sessionsChartBox.getChildren().remove((int)USERS_SESSIONS.remove(deletedSessionId));
+        });
+    }
+
+    @FXML
+    private void handleCloseSession() throws IOException {
+        sessionsChartBox.getChildren().remove((int)USERS_SESSIONS.remove(sessionOnDeleteId));
+        confirmDeleteSessionWindow.cancelWindow();
+
+        main.client.out.writeObject(new SocketMessage(MessageType.DELETE_OTHER_SESSION, sessionOnDeleteId));
+    }
+
+    @FXML
+    private void handleCancelConfirmDialog() {
+        confirmDeleteSessionWindow.cancelWindow();
     }
 
     public void addSessionsInfo(SessionDto sessionDto) {
         Platform.runLater(() ->{
             main.user.getSessions().add(sessionDto);
-            AnchorPane anchorPane = new SessionChart(sessionDto, this).getSessionPane();
-            sessionsChartBox.getChildren().add(anchorPane);
+            AnchorPane sessionPane = new SessionChart(sessionDto, this).getSessionPane();
+            sessionsChartBox.getChildren().add(sessionPane);
             USERS_SESSIONS.put(sessionDto.getId(), sessionsChartBox.getChildren().size() - 1);
         });
     }
@@ -295,14 +312,17 @@ public class UserChatMenuController {
     public void updateUserInfo(UserInfoDto userInfoDto) {
         if (userInfoDto.getId() == main.user.getId()) {
             main.user.setLastName(userInfoDto.getLastName());
-            main.user.setLastName(userInfoDto.getFirstName());
+            main.user.setFirstName(userInfoDto.getFirstName());
             main.user.setAvatar(userInfoDto.getAvatar());
             main.user.setAboutMe(userInfoDto.getAboutMe());
 
+            System.out.println("UserChatMenuController -> 310 -> ПРОВЕРКА ПОЛЬЗОВАТЕЛЯ");
+            System.out.println(main.user.getLastName() + " " + main.user.getFirstName());
+
             Platform.runLater(() -> {
-                updateUsernameAnywhere(userInfoDto.getLastName(), userInfoDto.getFirstName());
-                updateAboutMeAnyWhere(userInfoDto.getAboutMe());
-                updateAvatarAnywhere(userInfoDto.getAvatar());
+                updateUsernameAnywhere();
+                updateAboutMeAnyWhere();
+                updateAvatarAnywhere();
                 //ДЛЯ КОНФИГУРАЦИИ ОТДЕЛЬНО
             });
 
@@ -329,7 +349,6 @@ public class UserChatMenuController {
         } else {
             searchUserWarning.setVisible(false);
             for (UserInfoDto userDto : users) {
-                System.out.println(userDto.getLastOnline());
                 UserChart userChart = new UserChart(userDto, this);
                 TRACKING_ELEMENT_COLLECTION.put(userDto.getId(), userChart);
                 Platform.runLater(() -> userChartBox.getChildren().add(userChart.getAnchorPane()));
@@ -357,21 +376,10 @@ public class UserChatMenuController {
     @FXML
     private void showSettings() {
         settingsWindow.showWindow();
-        userMenuWindow.setChild(settingsWindow);
-
-//        windowsStack.push(settingsMenu);
-//        moveObject(settingsMenu, 380);
     }
 
     private void showEdit(CustomWindow customWindow) {
         customWindow.showWindow();
-//        customWindow.setCancelSpecFunc(this::handleEditBack);
-
-        settingsWindow.setChild(customWindow);
-        settingsMenu.setOnMouseClicked(mouseEvent -> {
-
-            customWindow.cancelWindow();
-        });
     }
 
     @FXML
@@ -382,7 +390,6 @@ public class UserChatMenuController {
     @FXML
     private void handleCancelEditProfile() {
         editProfileWindow.cancelWindow();
-        editProfileMenu.setOnMouseClicked(null);
     }
 
     @FXML
@@ -406,17 +413,13 @@ public class UserChatMenuController {
         });
 
         window.showWindow();
-        editProfileWindow.setChild(window);
+        window.setParent(editProfileWindow);
 
         editProfileScrollPane.setDisable(true);
         backEditProfileButton.setDisable(true);
 
         settingsMenu.getChildren().get(0).setDisable(true);
 
-        editProfileMenu.setOnMouseClicked(mouseEvent -> {
-            window.cancelWindow();
-            editProfileMenu.setOnMouseClicked(null);
-        });
     }
 
 
@@ -425,18 +428,22 @@ public class UserChatMenuController {
         handleOpenEditProfileDialog(editUsernameDialogWindow);
     }
 
-    private void updateUsernameAnywhere(String lastName, String firstName) {
+    private void updateUsernameAnywhere() {
+        String lastName = main.user.getLastName();
+        String firstName = main.user.getFirstName();
+
         lastNameTextField.setText(lastName);
         firstNameTextField.setText(firstName);
 
         String username = lastName + " " + firstName;
-        usernameLabel.setText(username);
         usernameEditLabel.setText(username);
         usernameInSettingsLabel.setText(username);
+
+        changeUsernameLabel();
     }
 
     @FXML
-    private void handleSaveEditUsername() throws IOException {
+    private void handleSaveEditUsername() {
         String lastName = lastNameTextField.getText();
         String firstName = firstNameTextField.getText();
 
@@ -449,12 +456,10 @@ public class UserChatMenuController {
         SocketMessage socketMessage = new SocketMessage(MessageType.EDIT_NAME,
                 new String[]{lastName, firstName});
 
+        //ВАЖНО
+        //ОБНОВИТСЯ ПО EDIT USERINFO
         main.client.sendSocketMessage(socketMessage);
-        main.user.setLastName(lastName);
-        main.user.setFirstName(firstName);
-
-        updateUsernameAnywhere(lastName, firstName);
-
+        //ВАЖНО
         //СДЕЛАТЬ AUTOCLOSED ИНТЕРФЕЙС
     }
 
@@ -463,13 +468,14 @@ public class UserChatMenuController {
         handleOpenEditProfileDialog(editAboutMeDialogWindow);
     }
 
-    private void updateAboutMeAnyWhere(String aboutMe) {
+    private void updateAboutMeAnyWhere() {
+        String aboutMe = main.user.getAboutMe();
         aboutMeTextField.setText(aboutMe);
         aboutMeInSettingsLabel.setText(aboutMe);
     }
 
     @FXML
-    private void handleSaveEditAboutMe() throws IOException {
+    private void handleSaveEditAboutMe() {
         String aboutMe = aboutMeTextField.getText();
 
         if (aboutMe.equals(main.user.getAboutMe()))
@@ -477,12 +483,10 @@ public class UserChatMenuController {
 
         SocketMessage socketMessage = new SocketMessage(MessageType.EDIT_ABOUT_ME, aboutMe);
 
+        //ОБНОВЛЯЕТСЯ АВТОМАТИЧЕСКИ
         main.client.sendSocketMessage(socketMessage);
-        main.user.setAboutMe(aboutMe);
-        updateAboutMeAnyWhere(aboutMe);
 
         editAboutMeDialogWindow.cancelWindow();
-
         editProfileMenu.setOnMouseClicked(null);
     }
 
@@ -494,7 +498,8 @@ public class UserChatMenuController {
 
 
 
-    private void updateAvatarAnywhere(byte[] avatar) {
+    private void updateAvatarAnywhere() {
+        byte[] avatar = main.user.getAvatar();
         if (avatar == null)
             return;
         ImagePattern imagePattern = getAvatarPattern(avatar);
@@ -528,7 +533,7 @@ public class UserChatMenuController {
         main.user.setAvatar(avatar);
         main.client.sendSocketMessage(new SocketMessage(MessageType.EDIT_AVATAR, avatar));
 
-        updateAvatarAnywhere(avatar);
+        updateAvatarAnywhere();
 
     }
 
@@ -549,7 +554,7 @@ public class UserChatMenuController {
             showLastOnlineRadioButton.fire();
     }
     @FXML
-    private void handleSaveEditPrivacy() throws IOException {
+    private void handleSaveEditPrivacy() {
         editPrivacyDialogWindow.cancelWindow();
 
         ConfigurationDto configurationDto = new ConfigurationDto(
@@ -560,13 +565,13 @@ public class UserChatMenuController {
 
         main.client.sendSocketMessage(new SocketMessage(MessageType.EDIT_CONFIGURATION, configurationDto));
         main.user.setConfiguration(configurationDto);
+        //ИСПРАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }
 
     private void updateConfigurationAnywhere(ConfigurationDto configurationDto) {
         if (!invisibleRadioButton.isSelected() && configurationDto.isInvisible()) {
             invisibleRadioButton.fire();
-            System.out.println("мы тут и кнопка выбрана??" + invisibleRadioButton.isSelected());
         }
         if (!showLastOnlineRadioButton.isSelected() && configurationDto.isShowLastOnline())
             showLastOnlineRadioButton.fire();

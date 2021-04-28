@@ -24,15 +24,10 @@ public class UserChart implements Tracking {
     private UserInfoDto userInfo;
 
     public UserChart(UserInfoDto userDto, UserChatMenuController userChatMenuController) {
-        Platform.runLater(() -> {
-            anchorPane.setOnMouseClicked(mouseEvent -> {
-                userChatMenuController.showFoundUserInfoMenu(userDto);
-            });
-        });
+        anchorPane = new AnchorPane();
 
         this.userInfo = userDto;
 
-        anchorPane = new AnchorPane();
         icon = new Circle();
         fullName = new Label();
         aboutMe = new Label();
@@ -43,12 +38,13 @@ public class UserChart implements Tracking {
         icon.setCenterY(50);
         changeAvatar();
 
-        fullName.setText(userDto.getLastName() + " " + userDto.getFirstName());
+        String name = userDto.getLastName() + " " + userDto.getFirstName();
+
+        System.out.println("ИМЯ " + name);
+
         fullName.setLayoutX(90);
         fullName.setLayoutY(20);
-        if (fullName.getText().equals(" ")) {
-            fullName.setText(userDto.getNickname());
-        }
+        changeFullName();
 
         aboutMe.setLayoutX(90);
         aboutMe.setLayoutY(60);
@@ -59,6 +55,7 @@ public class UserChart implements Tracking {
         Platform.runLater(this::setLastOnline);
 
 
+        Platform.runLater(() -> anchorPane.setOnMouseClicked(mouseEvent -> userChatMenuController.showFoundUserInfoMenu(userDto)));
 
         anchorPane.setMinHeight(100);
         anchorPane.getChildren().addAll(icon, fullName, aboutMe, lastOnline);
@@ -73,6 +70,16 @@ public class UserChart implements Tracking {
             icon.setFill(new ImagePattern(new Image(bin)));
         } else {
             icon.setFill(Paint.valueOf("#352482"));
+        }
+    }
+
+    private void changeFullName() {
+        String name = userInfo.getLastName() + " " + userInfo.getFirstName();
+
+        if (name.equals(" ")) {
+            fullName.setText(userInfo.getNickname());
+        } else {
+            fullName.setText(name);
         }
     }
 
@@ -91,19 +98,17 @@ public class UserChart implements Tracking {
 
     @Override
     public void updateInfo(Object userInfoObject) {
-
-        UserInfoDto userInfoDto = (UserInfoDto) userInfoObject;
+        userInfo = (UserInfoDto) userInfoObject;
 
         Platform.runLater(() ->{
-            System.out.println("МЫ ЗДЕСЬ = " + userInfoDto.getLastName());
-            fullName.setText(userInfoDto.getLastName() + " " + userInfoDto.getFirstName());
-            aboutMe.setText(userInfoDto.getAboutMe());
-            userInfo.setLastOnline(userInfoDto.getLastOnline());
+            changeFullName();
+            aboutMe.setText(userInfo.getAboutMe());
             setLastOnline();
 
-            if (!Arrays.equals(userInfoDto.getAvatar(), userInfo.getAvatar())) {
-                userInfo.setAvatar(userInfoDto.getAvatar());
+            if (!Arrays.equals(userInfo.getAvatar(), userInfo.getAvatar())) {
                 changeAvatar();
+            } else {
+                System.out.println("UserChart -> 104 -> ОДИНАКОВЫЕ АВАТАРЫ???");
             }
         });
 

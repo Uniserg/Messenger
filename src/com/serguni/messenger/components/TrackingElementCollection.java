@@ -9,6 +9,13 @@ public class TrackingElementCollection {
 
 
     public void updateInfo(UserInfoDto userInfoDto) {
+        System.out.println("TrackingElementCollection -> 12 -> ОШИБКА NULL");
+        System.out.println(trackingElements);
+        System.out.println("TrackingElementCollection -> 12 -> ОШИБКА NULL");
+
+        if (trackingElements.get(userInfoDto.getId()) == null)
+            return;
+
         for (Tracking tracking : trackingElements.get(userInfoDto.getId()))
             tracking.updateInfo(userInfoDto);
     }

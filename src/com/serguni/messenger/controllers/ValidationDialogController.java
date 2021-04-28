@@ -1,6 +1,7 @@
 package com.serguni.messenger.controllers;
 
 import com.google.gson.Gson;
+import com.serguni.messenger.dto.SessionCookie;
 import com.serguni.messenger.dto.models.SessionDto;
 import com.serguni.messenger.dto.models.UserDto;
 import javafx.fxml.FXML;
@@ -60,13 +61,13 @@ public class ValidationDialogController {
 
                 System.out.println("МЫ ЗДЕСЬ");
 
-                SessionDto sessionCookie = gson.fromJson(requestUtil.getResponse(), SessionDto.class);
+                SessionCookie sessionCookie = gson.fromJson(requestUtil.getResponse(), SessionCookie.class);
                 System.out.println("ПОЛУЧИЛИ КУКИ");
-                System.out.println(sessionCookie.getLocation());
+                System.out.println(sessionCookie);
 
-                session.setId(sessionCookie.getId());
-
-                main.session = sessionCookie;
+//                session.setId(sessionCookie.getId());
+//
+                main.sessionCookie = sessionCookie;
 
                 main.login();
 

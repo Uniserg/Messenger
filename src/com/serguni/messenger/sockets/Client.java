@@ -39,27 +39,27 @@ public class Client {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                try {
+                new Thread(() -> {
                     while (true) {
-                            try {
-                                SocketMessage message = (SocketMessage) in.readObject();
-                                System.out.println(message.getType());
+                        try {
+                            System.out.println("Client -> 45 -> МЫ ТУТ ЧИТАЕМ ПРИСЛАННЫЕ ОТ СЕРВЕРА СООБЩЕНИЯ");
+                            SocketMessage message = (SocketMessage) in.readObject();
+                            System.out.println(message.getType());
 
-                                switch (message.getType()) {
-                                    case SEARCH_USER -> foundUsers((Set<UserInfoDto>) message.getBody());
-                                    case UPDATE_TRACKING_USER -> updateTrackingUserInfo((UserInfoDto) message.getBody());
-                                    case ADD_NEW_SESSION -> userChatMenuController.addSessionsInfo((SessionDto) message.getBody());
-                                }
-
-                            } catch (EOFException e) {
-                                Platform.runLater(() -> main.showStartMenu());
-                                break;
+                            switch (message.getType()) {
+                                case SEARCH_USER -> foundUsers((Set<UserInfoDto>) message.getBody());
+                                case UPDATE_TRACKING_USER -> updateTrackingUserInfo((UserInfoDto) message.getBody());
+                                case ADD_NEW_SESSION -> userChatMenuController.addSessionsInfo((SessionDto) message.getBody());
+                                case DELETE_OTHER_SESSION -> userChatMenuController.deleteOtherSession((long) message.getBody());
                             }
+
+                        } catch (IOException | ClassNotFoundException e) {
+                            Platform.runLater(() -> main.showStartMenu());
+                            break;
+                        }
                     }
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                return null;
+                }).start();
+            return null;
             }
         };
 

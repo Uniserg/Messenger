@@ -2,6 +2,7 @@ package com.serguni.messenger;
 
 import com.serguni.messenger.components.NativeStage;
 import com.serguni.messenger.controllers.*;
+import com.serguni.messenger.dto.SessionCookie;
 import com.serguni.messenger.dto.models.SessionDto;
 import com.serguni.messenger.dto.models.UserDto;
 import com.serguni.messenger.dto.SocketMessage;
@@ -28,7 +29,7 @@ public class Main extends Application {
     private Stage primaryStage;
     public double curWidth;
     public double curHeight;
-
+    public SessionCookie sessionCookie;
     public SessionDto session;
     public UserDto user;
     public Client client;
@@ -64,7 +65,7 @@ public class Main extends Application {
 //            OutputStream os = socket.getOutputStream();
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
-            out.writeObject(session);
+            out.writeObject(sessionCookie);
             out.flush();
 //            InputStream is = socket.getInputStream();
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -82,6 +83,15 @@ public class Main extends Application {
 //            }
 
             user = (UserDto) message.getBody();
+
+            for (SessionDto sessionDto : user.getSessions()) {
+                if (sessionDto.getId() == sessionCookie.getSessionId()) {
+                    session = sessionDto;
+                    break;
+                }
+
+            }
+
             System.out.println(user);
             client = new Client(socket, in, out);
             client.setMain(this);
@@ -101,13 +111,13 @@ public class Main extends Application {
             FileInputStream cookieIs = new FileInputStream(COOKIE_FILE);
             ObjectInputStream objectCookieIs = new ObjectInputStream(cookieIs);
 
-            SessionDto sessionDto = (SessionDto) objectCookieIs.readObject();
+            sessionCookie = (SessionCookie) objectCookieIs.readObject();
 
             FileInputStream sessionIs = new FileInputStream(USER_CACHE_FILE);
             ObjectInputStream objectSessionIs = new ObjectInputStream(sessionIs);
 
             user = (UserDto) objectSessionIs.readObject();
-            session = sessionDto;
+//            session = sessionDto;
 
             objectCookieIs.close();
             objectSessionIs.close();
@@ -141,7 +151,7 @@ public class Main extends Application {
     }
 
     public void showUserChatMenu() {
-        System.out.println(session);
+//        System.out.println(session);
 
         FXMLLoader loader = new FXMLLoader();
 
@@ -266,7 +276,7 @@ public class Main extends Application {
             FileOutputStream cookieOs = new FileOutputStream(COOKIE_FILE);
             ObjectOutputStream objectCookieOs = new ObjectOutputStream(cookieOs);
 
-            objectCookieOs.writeObject(session);
+            objectCookieOs.writeObject(sessionCookie);
 
             FileOutputStream sessionOs = new FileOutputStream(USER_CACHE_FILE);
             ObjectOutputStream objectSessionOs = new ObjectOutputStream(sessionOs);
@@ -290,13 +300,6 @@ public class Main extends Application {
         return userChatMenuController;
     }
 
-    public void setSession(SessionDto session) {
-        this.session = session;
-    }
-
-    public SessionDto getSession() {
-        return session;
-    }
 
     public Stage getPrimaryStage() {
         return primaryStage;
