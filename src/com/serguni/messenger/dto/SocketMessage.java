@@ -13,10 +13,14 @@ public class SocketMessage implements Serializable {
         EDIT_ABOUT_ME,
         EDIT_AVATAR,
         EDIT_CONFIGURATION,
-        UPDATE_TRACKING_USER,
+        UPDATE_LAST_ONLINE_TO_TRACKING_USERS,
+        UPDATE_LAST_ONLINE_TO_OTHER_USER_SESSIONS,
+        //        UPDATE_TRACKING_USER,
         ADD_NEW_SESSION,
         DELETE_ALL_OTHER_SESSIONS,
-        DELETE_OTHER_SESSION
+        DELETE_OTHER_SESSION,
+        CREATE_NEW_CHAT,
+        CHAT_MESSAGE
     }
 
     @Serial

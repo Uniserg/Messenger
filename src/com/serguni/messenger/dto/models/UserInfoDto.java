@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
-public class UserInfoDto implements Serializable {
+public class UserInfoDto implements Serializable, Comparable<UserInfoDto> {
     @Serial
     private static final long serialVersionUID = 1;
 
@@ -25,7 +25,8 @@ public class UserInfoDto implements Serializable {
                        String firstName,
                        String lastName,
                        String aboutMe,
-                       byte[] avatar) {
+                       byte[] avatar,
+                       Date lastOnline) {
         this.id = id;
         this.nickname = nickname;
         this.email = email;
@@ -33,6 +34,7 @@ public class UserInfoDto implements Serializable {
         this.lastName = lastName;
         this.aboutMe = aboutMe;
         this.avatar = avatar;
+        this.lastOnline = lastOnline;
     }
 
     public UserInfoDto(String nickname,
@@ -157,7 +159,11 @@ public class UserInfoDto implements Serializable {
                 ", lastName='" + lastName + '\'' +
                 ", aboutMe='" + aboutMe + '\'' +
                 ", lastOnline=" + lastOnline +
-                ", avatar=" + Arrays.toString(avatar) +
                 '}';
+    }
+
+    @Override
+    public int compareTo(UserInfoDto o) {
+        return nickname.compareTo(o.getNickname());
     }
 }

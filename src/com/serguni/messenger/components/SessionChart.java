@@ -6,13 +6,15 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.Date;
+
 public class SessionChart implements Tracking {
     private AnchorPane sessionPane;
     private final Label deviceAndOs;
     private final Label ipAndLocation;
     private final Label signInFirst;
 
-    private Label lastOnline;
+    private final Label lastOnline;
     private SessionDto sessionInfo;
 
     public SessionChart(SessionDto sessionDto, UserChatMenuController userChatMenuController) {
@@ -39,7 +41,7 @@ public class SessionChart implements Tracking {
 
         deviceAndOs.setText(sessionDto.getDevice() + ", " + sessionDto.getOs());
         ipAndLocation.setText(sessionDto.getIp() + " - " + sessionDto.getLocation());
-        lastOnline.setText(sessionDto.getLastOnline().toString());
+        setLastOnline(sessionInfo.getLastOnline());
         signInFirst.setText(sessionDto.getSignInTime().toString());
 
         sessionPane.maxHeight(90);
@@ -61,14 +63,14 @@ public class SessionChart implements Tracking {
 //        sessionButton.setOnAction(mouseEvent -> userChatMenuController.showConfirmDeleteSessionDialog(this));
     }
 
-    @Override
-    public void updateInfo(Object sessionObject) {
-        SessionDto sessionDto = (SessionDto) sessionObject;
-
-        sessionInfo.setLastOnline(sessionDto.getLastOnline());
-
-        lastOnline.setText(sessionInfo.getLastOnline().toString());
-    }
+//    @Override
+//    public void updateInfo(Object sessionObject) {
+//        SessionDto sessionDto = (SessionDto) sessionObject;
+//
+//        sessionInfo.setLastOnline(sessionDto.getLastOnline());
+//
+//        lastOnline.setText(sessionInfo.getLastOnline().toString());
+//    }
 
     public void setSessionPane(AnchorPane sessionPane) {
         this.sessionPane = sessionPane;
@@ -90,8 +92,16 @@ public class SessionChart implements Tracking {
         return lastOnline;
     }
 
-    public void setLastOnline(Label lastOnline) {
-        this.lastOnline = lastOnline;
+    public void setLastOnline(Date newLastOnline) {
+        sessionInfo.setLastOnline(newLastOnline);
+
+        if (newLastOnline.equals(new Date(0))) {
+            lastOnline.setText("Online");
+            lastOnline.setStyle("-fx-text-fill: #6541cf");
+        } else {
+            lastOnline.setText(newLastOnline.toString());
+            lastOnline.setStyle("-fx-text-fill: #b7b6ba");
+        }
     }
 
     public SessionDto getSessionInfo() {

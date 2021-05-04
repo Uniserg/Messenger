@@ -12,6 +12,7 @@
 
 .button {
     -fx-background-color: #1d1d1d;
+    -fx-text-fill: #b7b6ba;
 }
 .button:hover {
     -fx-background-color: #3a3a3a;
@@ -269,6 +270,34 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 11pt;
 }
+
+/*.text-area {*/
+/*    -fx-text-fill: #b7b6ba;*/
+/*    -fx-font-size: 11pt;*/
+/*    -fx-border-color: #2e2b3d;*/
+/*    -fx-border-radius: 20pt;*/
+/*    -fx-background-radius: 20pt;*/
+/*}*/
+
+
+/*.text-area .content {*/
+/*    -fx-background-color: #2e2b3d;*/
+/*    -fx-text-fill: #b7b6ba;*/
+/*    -fx-border-color: #2e2b3d;*/
+/*    -fx-border-radius: 20pt;*/
+/*    -fx-background-radius: 20pt;*/
+/*}*/
+
+/*.text-area:focused {*/
+/*    -fx-border-color: #6541cf;*/
+/*    -fx-border-style: none;*/
+/*    -fx-border-radius: 20pt;*/
+/*    -fx-background-radius: 20pt;*/
+/*}*/
+
+/*.chat-area {*/
+/*    -fx-background-image:url("icons/background.png");*/
+/*}*/
 
 /*.user-menu {*/
 /*    -fx-opacity: 0;*/

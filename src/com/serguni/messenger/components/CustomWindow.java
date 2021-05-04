@@ -53,7 +53,7 @@ public class CustomWindow {
 
     public void cancelWindow() {
         System.out.println("CANCEL WINDOW");
-        moveObject(coordinate);
+        moveObject(0);
 
         parent.free();
 

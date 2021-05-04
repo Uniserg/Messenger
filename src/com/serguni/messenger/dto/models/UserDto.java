@@ -1,6 +1,8 @@
 package com.serguni.messenger.dto.models;
 
 import java.io.Serial;
+import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 public class UserDto extends UserInfoDto {
@@ -10,7 +12,10 @@ public class UserDto extends UserInfoDto {
     private Set<SessionDto> sessions;
     private Set<UserInfoDto> friends;
     private ConfigurationDto configuration;
-    private Set<WatchedChatDto> watchedChats;
+//    private Set<WatchedChatDto> watchedChats;
+    private Map<UserInfoDto, WatchedChatDto> watchedPrivateChats;
+    private Map<GroupDto, WatchedChatDto> watchedGroupChats;
+//    private List<TemporaryKeyDto> temporaryKeys;
     private Set<BlockedUserDto> blockedUsers;
     private Set<FriendRequestDto> incomingFriendRequests;
     private Set<FriendRequestDto> outgoingFriendRequests;
@@ -23,22 +28,54 @@ public class UserDto extends UserInfoDto {
                    String firstName,
                    String lastName,
                    String aboutMe,
-                   byte[] avatar) {
-        super(id, nickname, email, firstName, lastName, aboutMe, avatar);
-    }
-
-    public UserDto(long id,
-                   String nickname,
-                   String email,
-                   String firstName,
-                   String lastName,
-                   String aboutMe) {
-        this(id, nickname, email, firstName, lastName, aboutMe, null);
+                   byte[] avatar,
+                   Date lastOnline) {
+        super(id, nickname, email, firstName, lastName, aboutMe, avatar, lastOnline);
     }
 
     public UserDto(String nickname, String email, String firstName, String lastName, String aboutMe) {
         super(nickname, email, firstName, lastName, aboutMe);
     }
+
+    //    public UserDto(User user) {
+//        id = user.getId();
+//        nickname = user.getNickname();
+//        email = user.getEmail();
+//        firstName = user.getFirstName();
+//        lastName = user.getLastName();
+//        aboutMe = user.getAboutMe();
+//        avatar = user.getAvatar();
+//        sessions = new ArrayList<>();
+//        for (Session session : user.getSessions()) {
+//            sessions.add(new SessionDto(session));
+//        }
+//        friends = new HashSet<>();
+//        for (User friend : user.getFriends()){
+//            friends.add(new UserDto(friend));
+//        }
+//        configuration = new ConfigurationDto(user.getConfiguration());
+//        watchedChats = new HashSet<>();
+//        for (WatchedChat watchedChat : user.getWatchedChats()) {
+//            watchedChats.add(new WatchedChatDto(watchedChat));
+//        }
+//        temporaryKeys = new ArrayList<>();
+//        for (TemporaryKey temporaryKey : user.getTemporaryKeys()) {
+//            temporaryKeys.add(new TemporaryKeyDto(temporaryKey));
+//        }
+//        blockedUsers = new HashSet<>();
+//        for (BlockedUser blockedUser : user.getBlockedUsers()) {
+//            blockedUsers.add(new BlockedUserDto(blockedUser));
+//        }
+//        incomingFriendRequests = new ArrayList<>();
+//        for (FriendRequest friendRequest : user.getIncomingFriendRequests()) {
+//            incomingFriendRequests.add(new FriendRequestDto(friendRequest));
+//        }
+//        outgoingFriendRequests = new ArrayList<>();
+//        for (FriendRequest friendRequest : user.getOutgoingFriendRequests()) {
+//            outgoingFriendRequests.add(new FriendRequestDto(friendRequest));
+//        }
+//
+//    }
 
     public Set<SessionDto> getSessions() {
         return sessions;
@@ -64,13 +101,29 @@ public class UserDto extends UserInfoDto {
         this.configuration = configuration;
     }
 
-    public Set<WatchedChatDto> getWatchedChats() {
-        return watchedChats;
+    public Map<UserInfoDto, WatchedChatDto> getWatchedPrivateChats() {
+        return watchedPrivateChats;
     }
 
-    public void setWatchedChats(Set<WatchedChatDto> watchedChats) {
-        this.watchedChats = watchedChats;
+    public void setWatchedPrivateChats(Map<UserInfoDto, WatchedChatDto> watchedPrivateChats) {
+        this.watchedPrivateChats = watchedPrivateChats;
     }
+
+    public Map<GroupDto, WatchedChatDto> getWatchedGroupChats() {
+        return watchedGroupChats;
+    }
+
+    public void setWatchedGroupChats(Map<GroupDto, WatchedChatDto> watchedGroupChats) {
+        this.watchedGroupChats = watchedGroupChats;
+    }
+
+    //    public List<TemporaryKeyDto> getTemporaryKeys() {
+//        return temporaryKeys;
+//    }
+//
+//    public void setTemporaryKeys(List<TemporaryKeyDto> temporaryKeys) {
+//        this.temporaryKeys = temporaryKeys;
+//    }
 
     public Set<BlockedUserDto> getBlockedUsers() {
         return blockedUsers;
@@ -102,7 +155,8 @@ public class UserDto extends UserInfoDto {
                 "sessions=" + sessions +
                 ", friends=" + friends +
                 ", configuration=" + configuration +
-                ", watchedChats=" + watchedChats +
+                ", watchedPrivateChats=" + watchedPrivateChats +
+                ", watchedGroupChats=" + watchedGroupChats +
                 ", blockedUsers=" + blockedUsers +
                 ", incomingFriendRequests=" + incomingFriendRequests +
                 ", outgoingFriendRequests=" + outgoingFriendRequests +

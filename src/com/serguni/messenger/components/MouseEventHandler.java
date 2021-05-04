@@ -1,11 +1,9 @@
 package com.serguni.messenger.components;
 
 import com.serguni.messenger.controllers.RootSceneController;
-import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;

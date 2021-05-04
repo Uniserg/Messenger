@@ -57,13 +57,10 @@ public class ValidationDialogController {
             requestUtil.run();
 
             if (requestUtil.getResponseCode() == 200) {
-                System.out.println(requestUtil.getJson());
-
-                System.out.println("МЫ ЗДЕСЬ");
 
                 SessionCookie sessionCookie = gson.fromJson(requestUtil.getResponse(), SessionCookie.class);
                 System.out.println("ПОЛУЧИЛИ КУКИ");
-                System.out.println(sessionCookie);
+//                System.out.println(sessionCookie);
 
 //                session.setId(sessionCookie.getId());
 //
@@ -77,8 +74,8 @@ public class ValidationDialogController {
                 }
 
             } else {
-                System.out.println(requestUtil.getResponseCode());
-                System.out.println(requestUtil.getResponse());
+//                System.out.println(requestUtil.getResponseCode());
+//                System.out.println(requestUtil.getResponse());
             }
         }
 

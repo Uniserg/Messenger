@@ -7,17 +7,11 @@ import com.serguni.messenger.dto.models.SessionDto;
 import com.serguni.messenger.dto.models.UserDto;
 import com.serguni.messenger.dto.SocketMessage;
 import com.serguni.messenger.sockets.Client;
-import com.serguni.messenger.components.ChatPane;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,7 +25,7 @@ public class Main extends Application {
     public double curHeight;
     public SessionCookie sessionCookie;
     public SessionDto session;
-    public UserDto user;
+    public static UserDto user;
     public Client client;
 
     private UserChatMenuController userChatMenuController;
@@ -67,7 +61,7 @@ public class Main extends Application {
 
             out.writeObject(sessionCookie);
             out.flush();
-//            InputStream is = socket.getInputStream();
+
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             SocketMessage message = (SocketMessage) in.readObject();
 
@@ -77,10 +71,6 @@ public class Main extends Application {
             if (message.getBody() == null) {
                 return;
             }
-
-//            if (is.read() == 0) {
-//                return;
-//            }
 
             user = (UserDto) message.getBody();
 
@@ -92,7 +82,6 @@ public class Main extends Application {
 
             }
 
-            System.out.println(user);
             client = new Client(socket, in, out);
             client.setMain(this);
 
@@ -164,17 +153,17 @@ public class Main extends Application {
             userChatMenuController = loader.getController();
             userChatMenuController.setMain(this);
 
-            AnchorPane userMenuBack = (AnchorPane) ((AnchorPane) ((AnchorPane) userMenu.getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(0);
-
-            HBox hBox = (HBox) userMenuBack.getChildrenUnmodifiable().get(0);
-            ScrollPane scrollPane = (ScrollPane) hBox.getChildrenUnmodifiable().get(0);
-            VBox vBox = (VBox) scrollPane.getContent();
-            ObservableList<Node> chats = vBox.getChildren();
-
-
-            for (int i = 0; i < 4; i ++) {
-                chats.add(0, new ChatPane().getChatPane());
-            }
+//            AnchorPane userMenuBack = (AnchorPane) ((AnchorPane) ((AnchorPane) userMenu.getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(0);
+//
+//            HBox hBox = (HBox) userMenuBack.getChildrenUnmodifiable().get(0);
+//            ScrollPane scrollPane = (ScrollPane) hBox.getChildrenUnmodifiable().get(0);
+//            VBox vBox = (VBox) scrollPane.getContent();
+//            ObservableList<Node> chats = vBox.getChildren();
+//
+//
+//            for (int i = 0; i < 4; i ++) {
+//                chats.add(0, new ChatPane().getChatPane());
+//            }
 
 
         } catch (IOException e) {

@@ -13,8 +13,8 @@ public class MessageDto implements Serializable {
     private Date sendTime;
     private String text;
     private Date readTime;
-    private ChatDto chat;
-    private UserInfoDto user;
+    private long chatId;
+    private String userSenderNickname;
     private Set<MessageDto> redirectedMessages;
     private Set<ContentDto> contents;
 
@@ -35,18 +35,24 @@ public class MessageDto implements Serializable {
 //        }
 //    }
 
-
-    public MessageDto(long id,
-                      Date sendTime,
-                      String text,
-                      Date readTime,
-                      UserInfoDto user) {
-        this.id = id;
-        this.sendTime = sendTime;
+    public MessageDto(String text, long chatId, String userSenderNickname) {
         this.text = text;
-        this.readTime = readTime;
-        this.user = user;
+        this.chatId = chatId;
+        this.userSenderNickname = userSenderNickname;
     }
+
+
+//    public MessageDto(long id,
+//                      Date sendTime,
+//                      String text,
+//                      Date readTime,
+//                      UserInfoDto user) {
+//        this.id = id;
+//        this.sendTime = sendTime;
+//        this.text = text;
+//        this.readTime = readTime;
+//        this.user = user;
+//    }
 
     public long getId() {
         return id;
@@ -80,20 +86,20 @@ public class MessageDto implements Serializable {
         this.readTime = readTime;
     }
 
-    public ChatDto getChat() {
-        return chat;
+    public long getChatId() {
+        return chatId;
     }
 
-    public void setChat(ChatDto chat) {
-        this.chat = chat;
+    public void setChatId(long chatId) {
+        this.chatId = chatId;
     }
 
-    public UserInfoDto getUser() {
-        return user;
+    public String getUserSenderNickname() {
+        return userSenderNickname;
     }
 
-    public void setUser(UserInfoDto user) {
-        this.user = user;
+    public void setUserSenderNickname(String userSenderNickname) {
+        this.userSenderNickname = userSenderNickname;
     }
 
     public Set<MessageDto> getRedirectedMessages() {

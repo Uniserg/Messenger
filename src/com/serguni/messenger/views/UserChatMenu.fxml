@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,17 +19,17 @@
 
 <AnchorPane minHeight="450.0" minWidth="370.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.UserChatMenuController">
    <children>
-      <AnchorPane fx:id="userChatMenu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="506.0" prefWidth="422.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="userChatMenu" prefHeight="506.0" prefWidth="422.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="370.6666666666667" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="370.6666666666667" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <HBox prefHeight="450.0" prefWidth="370.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                            <children>
                               <ScrollPane fitToHeight="true" hbarPolicy="NEVER" hmax="0.0" maxWidth="370.0" pannable="true" prefHeight="450.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" vbarPolicy="NEVER">
                                  <content>
-                                    <VBox maxWidth="370.0" minWidth="370.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" />
+                                    <VBox fx:id="userChats" maxWidth="370.0" minWidth="370.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" />
                                  </content>
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
@@ -52,9 +53,24 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane style="-fx-background-color: #2b2b2b;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="370.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Button" />
+                        <AnchorPane fx:id="chatArea" prefHeight="510.0" prefWidth="328.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane prefHeight="100.0" prefWidth="328.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <ScrollPane fx:id="scrollMessages" fitToHeight="true" fitToWidth="true" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" styleClass="background" vvalue="1.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                <content>
+                                  <AnchorPane styleClass="background" />
+                                </content>
+                              </ScrollPane>
+                              <AnchorPane layoutY="472.6666564941406" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <children>
+                                    <TextArea fx:id="enterMessageTextArea" focusTraversable="false" layoutX="370.0" layoutY="206.0" pickOnBounds="false" prefHeight="2.0" promptText="Enter message" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.33333333333337123" AnchorPane.rightAnchor="55.0" />
+                                    <Button layoutX="478.0" layoutY="206.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="55.0" text="Send" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </children>
@@ -75,7 +91,7 @@
                      <graphic>
                         <AnchorPane prefHeight="50.0" prefWidth="320.0">
                            <children>
-                              <Label layoutX="64.0" layoutY="18.0" stylesheets="@Dark.css" text="Friends" />
+                              <Label layoutX="64.0" layoutY="18.0" stylesheets="@Dark.css" text="Interlocutors" />
                               <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@icons/friends1.png" />
@@ -117,31 +133,35 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="friendsMenu" layoutX="371.0" layoutY="21.0" prefHeight="455.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="-320.0" AnchorPane.topAnchor="20.0">
+      <AnchorPane layoutX="422.0" layoutY="20.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="-320.0" AnchorPane.topAnchor="20.0">
          <children>
-            <AnchorPane prefHeight="80.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="387.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="friendsMenu" prefHeight="470.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TextField fx:id="searchUserTextField" layoutX="44.0" layoutY="14.0" onKeyPressed="#handleEnterPressed" prefHeight="37.0" prefWidth="206.0" promptText="Search..." />
-                  <Button layoutX="258.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSearchUsers" style="-fx-background-radius: 20; -fx-border-radius: 20;">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
-                           <image>
-                              <Image url="@icons/search.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Line endX="218.0" fill="#6541cf" layoutX="101.0" layoutY="78.0" startX="-100.0" stroke="#6541cf" strokeWidth="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0" />
-                  <Label fx:id="searchUserWarning" layoutX="101.0" layoutY="56.0" styleClass="label-warning" text="No user was found" textFill="#a03737" visible="false" />
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutY="80.0" prefHeight="386.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-               <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="320.0" styleClass="background" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <content>
-                        <VBox fx:id="userChartBox" minHeight="294.0" minWidth="320.0" prefHeight="294.0" prefWidth="320.0" styleClass="background" />
-                     </content>
-                  </ScrollPane>
+                  <AnchorPane prefHeight="80.0" prefWidth="320.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="387.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TextField fx:id="searchUserTextField" layoutX="44.0" layoutY="14.0" onKeyPressed="#handleEnterPressed" prefHeight="37.0" prefWidth="206.0" promptText="Search..." />
+                        <Button layoutX="258.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleSearchUsers" style="-fx-background-radius: 20; -fx-border-radius: 20;">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                                 <image>
+                                    <Image url="@icons/search.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Line endX="218.0" fill="#6541cf" layoutX="101.0" layoutY="78.0" startX="-100.0" stroke="#6541cf" strokeWidth="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0" />
+                        <Label fx:id="searchUserWarning" layoutX="101.0" layoutY="56.0" styleClass="label-warning" text="No user was found" textFill="#a03737" visible="false" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="80.0" prefHeight="386.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="320.0" styleClass="background" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <VBox fx:id="userChartBox" minHeight="294.0" minWidth="320.0" prefHeight="294.0" prefWidth="320.0" styleClass="background" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </children>
@@ -156,7 +176,7 @@
                            <children>
                               <Circle fx:id="circleAvatarInSettings" fill="#6541cf" layoutX="52.0" layoutY="98.0" radius="36.0" stroke="#6541cf" strokeType="INSIDE" />
                               <Label fx:id="usernameInSettingsLabel" layoutX="102.0" layoutY="67.0" stylesheets="@Dark.css" text="Full name" />
-                              <Label layoutX="103.0" layoutY="98.0" text="Date online" />
+                              <Label layoutX="103.0" layoutY="98.0" text="Online" />
                               <Line endX="269.95953369140625" endY="-7.62939453125E-6" fill="#6541cf" layoutX="101.0" layoutY="152.0" startX="-100.0" stroke="#6541cf" strokeWidth="3.0" AnchorPane.leftAnchor="-1.1213226318359375" AnchorPane.rightAnchor="2.252507527669252" />
                               <Button layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleCancelSettings" prefHeight="4.0" prefWidth="2.0" AnchorPane.leftAnchor="10.0">
                                  <graphic>
@@ -386,19 +406,40 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="foundUserInfoMenu" focusTraversable="true" maxHeight="506.0" maxWidth="370.0" minHeight="506.0" minWidth="370.0" prefHeight="506.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.rightAnchor="-370.0">
+      <AnchorPane fx:id="foundUserInfoMenu" focusTraversable="true" maxHeight="506.0" maxWidth="370.0" minHeight="506.0" minWidth="370.0" prefHeight="506.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-370.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Line endX="259.6666564941406" endY="-7.62939453125E-6" fill="#6541cf" layoutX="111.0" layoutY="118.0" startX="-111.00000762939453" startY="-7.62939453125E-6" stroke="#6541cf" strokeWidth="2.0" />
-            <ImageView fitHeight="26.0" fitWidth="36.0" layoutX="30.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
-               <image>
-                  <Image url="@icons/back.png" />
-               </image>
-            </ImageView>
-            <Circle fx:id="foundUserInfoAvatar" fill="#6541cf" layoutX="111.0" layoutY="54.0" radius="40.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <Label fx:id="foundUserInfoFullname" layoutX="177.0" layoutY="20.0" text="Full Name" />
-            <Label fx:id="foundUserInfoLastOnline" layoutX="177.0" layoutY="45.0" prefHeight="17.0" prefWidth="67.0" styleClass="label-last-online" stylesheets="@Dark.css" text="Last Online" />
-            <Label fx:id="foundUserInfoNickname" layoutX="287.0" layoutY="85.0" styleClass="label-nickname" text="\@Nickname" />
-            <Button layoutX="56.0" layoutY="158.0" mnemonicParsing="false" text="Write Message" />
+            <AnchorPane fx:id="userInfoPane" prefHeight="120.0" prefWidth="370.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button layoutX="22.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleCloseFoundUserMenu">
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" styleClass="button">
+                     <image>
+                        <Image url="@icons/back.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+               <children>
+                  <Button layoutX="20.0" mnemonicParsing="false" onAction="#handleShowChatArea" text="Write Message">
+                     <graphic>
+                        <ImageView fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/chat.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="180.0" mnemonicParsing="false" text="Friend Request">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/add-friend.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="sessionsMenu" layoutX="-393.0" layoutY="-4.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -426,7 +467,7 @@
                   <Label layoutX="33.0" layoutY="83.0" text="This session" />
                   <AnchorPane layoutY="111.0" prefHeight="90.0" prefWidth="371.0" styleClass="menu" stylesheets="@Dark.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <Label fx:id="currentSessionLastOnline" layoutX="200.0" layoutY="35.0" text="Last Online" />
+                        <Label fx:id="currentSessionLastOnline" layoutX="200.0" layoutY="35.0" style="-fx-text-fill: #6541cf;" text="Online" />
                         <Label fx:id="deviceAndOs" layoutX="14.0" layoutY="14.0" text="Device + os" />
                         <Label fx:id="signInFirstTime" layoutX="14.0" layoutY="55.0" text="Sign in time first" />
                         <Label fx:id="ipAndLocation" layoutX="14.0" layoutY="34.0" text="Ip + location" />

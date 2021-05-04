@@ -1,42 +1,35 @@
 package com.serguni.messenger.components;
 
-import com.serguni.messenger.dto.models.UserInfoDto;
-
 import java.util.*;
 
 public class TrackingElementCollection {
-    public final Map<Long, Set<Tracking>> trackingElements = new HashMap<>();
-
-
-    public void updateInfo(UserInfoDto userInfoDto) {
-        System.out.println("TrackingElementCollection -> 12 -> ОШИБКА NULL");
-        System.out.println(trackingElements);
-        System.out.println("TrackingElementCollection -> 12 -> ОШИБКА NULL");
-
-        if (trackingElements.get(userInfoDto.getId()) == null)
-            return;
-
-        for (Tracking tracking : trackingElements.get(userInfoDto.getId()))
-            tracking.updateInfo(userInfoDto);
-    }
+    public final Map<Long, Set<UserTrackingImpl>> tempTrackingElements = new HashMap<>();
+    public final Map<Long, Set<UserTrackingImpl>> longTrackingElements = new HashMap<>();
 
     public void removeAll(Set<Long> users) {
         for (Long userId : users) {
-            trackingElements.remove(userId);
+            tempTrackingElements.remove(userId);
         }
     }
 
-    public void put(long userId, Tracking tracking) {
-        if (!trackingElements.containsKey(userId))
-            trackingElements.put(userId, new HashSet<>());
+    public void putToTemp(long userId, UserTrackingImpl tracking) {
+        if (!tempTrackingElements.containsKey(userId))
+            tempTrackingElements.put(userId, new HashSet<>());
 
-        trackingElements.get(userId).add(tracking);
+        tempTrackingElements.get(userId).add(tracking);
     }
 
-    public void remove(Long userId, Tracking tracking) {
-        trackingElements.get(userId).remove(tracking);
+    public void putToLong(long userId, UserTrackingImpl tracking) {
+        if (!longTrackingElements.containsKey(userId))
+            longTrackingElements.put(userId, new HashSet<>());
 
-        if (trackingElements.get(userId).isEmpty())
-            trackingElements.remove(userId);
+        longTrackingElements.get(userId).add(tracking);
+    }
+
+    public void removeTemp(Long userId, Tracking tracking) {
+        tempTrackingElements.get(userId).remove(tracking);
+
+        if (tempTrackingElements.get(userId).isEmpty())
+            tempTrackingElements.remove(userId);
     }
 }

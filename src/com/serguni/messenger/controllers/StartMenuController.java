@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 public class StartMenuController {
     @FXML
@@ -51,7 +52,7 @@ public class StartMenuController {
 
             if (requestUtil.getResponseCode() == 200) {
                 notFoundUserLabel.setVisible(false);
-                System.out.println(requestUtil.getResponse());
+//                System.out.println(requestUtil.getResponse());
                 UserDtoJson userDtoJson = new Gson().fromJson(requestUtil.getResponse(), UserDtoJson.class);
 
                 byte[] avatar = null;
@@ -67,22 +68,20 @@ public class StartMenuController {
                         userDtoJson.getFirstName(),
                         userDtoJson.getLastName(),
                         userDtoJson.getAboutMe(),
-                        avatar
+                        avatar,
+                        new Date(0)
                 );
 
 //                UserDto user = new Gson().fromJson(requestUtil.getResponse(), UserDto.class);
-                System.out.println(userDto);
                 main.showValidationKeyDialog(null, userDto);
             } else {
                 notFoundUserLabel.setVisible(true);
                 System.out.println(requestUtil.getResponseCode());
-                System.out.println(requestUtil.getResponse());
             }
         }
     }
 
     public void handleEnterPressed(KeyEvent keyEvent) {
-        System.out.println(keyEvent.getCode());
         if (keyEvent.getCode() == KeyCode.ENTER) {
             handleLogIn();
         }
