@@ -60,10 +60,6 @@ public class ValidationDialogController {
 
                 SessionCookie sessionCookie = gson.fromJson(requestUtil.getResponse(), SessionCookie.class);
                 System.out.println("ПОЛУЧИЛИ КУКИ");
-//                System.out.println(sessionCookie);
-
-//                session.setId(sessionCookie.getId());
-//
                 main.sessionCookie = sessionCookie;
 
                 main.login();
@@ -73,10 +69,8 @@ public class ValidationDialogController {
                     dialogStage.getOwner().hide();
                 }
 
-            } else {
-//                System.out.println(requestUtil.getResponseCode());
-//                System.out.println(requestUtil.getResponse());
             }
+
         }
 
     }

@@ -1,12 +1,8 @@
 package com.serguni.messenger.components;
 
 import com.serguni.messenger.dto.models.UserInfoDto;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -15,8 +11,6 @@ import java.io.ByteArrayInputStream;
 import java.util.Date;
 
 public abstract class UserTrackingImpl implements UserTracking {
-//    private Pane prevWindow;
-//    private Pane currentWindow;
     protected Label nickname;
     protected Label fullName;
     protected Circle avatar;
@@ -25,10 +19,6 @@ public abstract class UserTrackingImpl implements UserTracking {
     protected final UserInfoDto userInfoDto;
 
     public UserTrackingImpl(UserInfoDto userInfoDto) {
-
-
-//        currentWindow = new AnchorPane();
-//        prevWindow = null;
 
         this.userInfoDto = userInfoDto;
 
@@ -43,8 +33,6 @@ public abstract class UserTrackingImpl implements UserTracking {
         updateAvatar(userInfoDto.getAvatar());
         updateAboutMe(userInfoDto.getAboutMe());
         updateLastOnline(userInfoDto.getLastOnline());
-
-//        setWindow(currentWindow);
     }
 
     @Override
@@ -128,29 +116,4 @@ public abstract class UserTrackingImpl implements UserTracking {
     public void setAboutMe(Label aboutMe) {
         this.aboutMe = aboutMe;
     }
-
-//    public Pane getCurrentWindow() {
-//        return currentWindow;
-//    }
-//
-//    private void setWindow(Pane pane) {
-//        pane.getChildren().addAll(
-//                nickname,
-//                fullName,
-//                avatar,
-//                lastOnline,
-//                aboutMe);
-//    }
-//
-//    public void setPrevWindow() {
-//        currentWindow = prevWindow;
-//        prevWindow = null;
-//        setWindow(currentWindow);
-//    }
-//
-//    public void setCurrentWindow(Pane currentWindow) {
-//        this.prevWindow = this.currentWindow;
-//        this.currentWindow = currentWindow;
-//        setWindow(currentWindow);
-//    }
 }

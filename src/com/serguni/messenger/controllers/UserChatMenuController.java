@@ -233,7 +233,7 @@ public class UserChatMenuController {
         //ИНИЦИАЛИЗАЦИЯ ТЕКУЩЕЙ СЕССИИ (В ОКНЕ)
 
         // ДОБАВЛЕНИЕ ДРУГИХ СЕССИЙ
-        Set<SessionDto> userSessions = main.user.getSessions();
+        Set<SessionDto> userSessions = Main.user.getSessions();
         for (SessionDto userSession : userSessions) {
             if (userSession.getId() != main.session.getId()) {
                 SessionChart sessionChart = new SessionChart(userSession, this);
@@ -242,25 +242,25 @@ public class UserChatMenuController {
 
 //                Map<Long, SessionChart> userSessionChart = new HashMap<>();
 
-                Map<Long, SessionChart> userSessionChart = USERS_SESSIONS.computeIfAbsent(main.user.getId(), k -> new HashMap<>());
+                Map<Long, SessionChart> userSessionChart = USERS_SESSIONS.computeIfAbsent(Main.user.getId(), k -> new HashMap<>());
                 userSessionChart.put(userSession.getId(), sessionChart);
             }
         }
         System.out.println(USERS_SESSIONS);
         // ДОБАВЛЕНИЕ ДРУГИХ СЕССИЙ
-        emailInSettingsLabel.setText(main.user.getEmail());
+        emailInSettingsLabel.setText(Main.user.getEmail());
         updateUsernameAnywhere();
         updateAboutMeAnyWhere();
         updateAvatarAnywhere();
-        updateConfigurationAnywhere(main.user.getConfiguration());
+        updateConfigurationAnywhere(Main.user.getConfiguration());
 
     }
 
     private void changeUsernameLabel() {
-        String nameLabel = main.user.getLastName() + " " + main.user.getFirstName();
+        String nameLabel = Main.user.getLastName() + " " + Main.user.getFirstName();
         System.out.println(nameLabel.equals(" "));
         if (nameLabel.equals(" ")) {
-            usernameLabel.setText(main.user.getNickname());
+            usernameLabel.setText(Main.user.getNickname());
         } else {
             usernameLabel.setText(nameLabel);
         }
@@ -357,7 +357,7 @@ public class UserChatMenuController {
 
     public void addSessionsInfo(SessionDto sessionDto) {
         Platform.runLater(() ->{
-            main.user.getSessions().add(sessionDto);
+            Main.user.getSessions().add(sessionDto);
             SessionChart sessionChart = new SessionChart(sessionDto, this);
             sessionsChartBox.getChildren().add(0, sessionChart.getSessionPane());
 
@@ -366,7 +366,7 @@ public class UserChatMenuController {
 
 
 //            Map<Long, SessionChart> userSessionChart = new HashMap<>();
-            Map<Long, SessionChart> userSessionChart = USERS_SESSIONS.computeIfAbsent(main.user.getId(), k -> new HashMap<>());
+            Map<Long, SessionChart> userSessionChart = USERS_SESSIONS.computeIfAbsent(Main.user.getId(), k -> new HashMap<>());
             userSessionChart.put(sessionDto.getId(), sessionChart);
         });
     }
@@ -400,8 +400,8 @@ public class UserChatMenuController {
     }
 
     public void updateAboutMeInfo(long userId, String newAboutMe) {
-        if (main.user.getId() == userId) {
-            main.user.setAboutMe(newAboutMe);
+        if (Main.user.getId() == userId) {
+            Main.user.setAboutMe(newAboutMe);
             updateAboutMeAnyWhere();
         }
 
@@ -787,7 +787,7 @@ public class UserChatMenuController {
     }
 
     private void updateAboutMeAnyWhere() {
-        String aboutMe = main.user.getAboutMe();
+        String aboutMe = Main.user.getAboutMe();
         aboutMeTextField.setText(aboutMe);
         aboutMeInSettingsLabel.setText(aboutMe);
     }
@@ -817,7 +817,7 @@ public class UserChatMenuController {
 
 
     private void updateAvatarAnywhere() {
-        byte[] avatar = main.user.getAvatar();
+        byte[] avatar = Main.user.getAvatar();
         if (avatar == null)
             return;
         ImagePattern imagePattern = getAvatarPattern(avatar);
@@ -848,7 +848,7 @@ public class UserChatMenuController {
 
         FileInputStream fileIn = new FileInputStream(imagePath);
         byte[] avatar = fileIn.readAllBytes();
-        main.user.setAvatar(avatar);
+        Main.user.setAvatar(avatar);
         main.client.sendSocketMessage(new SocketMessage(MessageType.EDIT_AVATAR, avatar));
 
         updateAvatarAnywhere();
@@ -864,11 +864,11 @@ public class UserChatMenuController {
     private void handleCancelEditPrivacy() {
         editPrivacyDialogWindow.cancelWindow();
 
-        if (invisibleRadioButton.isSelected() && !main.user.getConfiguration().isInvisible())
+        if (invisibleRadioButton.isSelected() && !Main.user.getConfiguration().isInvisible())
             invisibleRadioButton.fire();
-        if (messageFromFriendsOnlyRadioButton.isSelected() && !main.user.getConfiguration().isMsgFromFriendsOnly())
+        if (messageFromFriendsOnlyRadioButton.isSelected() && !Main.user.getConfiguration().isMsgFromFriendsOnly())
             messageFromFriendsOnlyRadioButton.fire();
-        if (showLastOnlineRadioButton.isSelected() && !main.user.getConfiguration().isShowLastOnline())
+        if (showLastOnlineRadioButton.isSelected() && !Main.user.getConfiguration().isShowLastOnline())
             showLastOnlineRadioButton.fire();
     }
     @FXML
@@ -876,13 +876,13 @@ public class UserChatMenuController {
         editPrivacyDialogWindow.cancelWindow();
 
         ConfigurationDto configurationDto = new ConfigurationDto(
-                main.user.getId(),
+                Main.user.getId(),
                 messageFromFriendsOnlyRadioButton.isSelected(),
                 showLastOnlineRadioButton.isSelected(),
                 invisibleRadioButton.isSelected());
 
         main.client.sendSocketMessage(new SocketMessage(MessageType.EDIT_CONFIGURATION, configurationDto));
-        main.user.setConfiguration(configurationDto);
+        Main.user.setConfiguration(configurationDto);
         //ИСПРАВИТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }

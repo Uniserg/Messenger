@@ -5,8 +5,6 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class CustomWindow {
-//    private Stack<CustomWindow> windowsStack;
-
     private Pane window;
     private Runnable cancelSpecFunc;
     private CustomWindow child;
@@ -73,17 +71,11 @@ public class CustomWindow {
     }
 
     public void setChild(CustomWindow child) {
-//        window.getChildren().get(0).setDisable(true);
-//        window.getChildren().get(0).setOpacity(0.9);
-//        child.setParent(this);
         this.child = child;
     }
 
     public void setParent(CustomWindow parent) {
         this.parent = parent;
-
-        //////////////////////////////
-        //////////////////////////////////
     }
 
     public void free() {

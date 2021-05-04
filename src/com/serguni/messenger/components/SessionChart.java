@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.Date;
 
-public class SessionChart implements Tracking {
+public class SessionChart {
     private AnchorPane sessionPane;
     private final Label deviceAndOs;
     private final Label ipAndLocation;
@@ -56,21 +56,7 @@ public class SessionChart implements Tracking {
 
         sessionPane.setOnMouseEntered(e -> sessionPane.setStyle("-fx-background-color: #3a3a3a"));
         sessionPane.setOnMouseExited(e -> sessionPane.setStyle("-fx-background-color: #1d1d1d"));
-
-//        sessionButton = new Button();
-//        sessionButton.getChildrenUnmodifiable().add(sessionPane);
-//
-//        sessionButton.setOnAction(mouseEvent -> userChatMenuController.showConfirmDeleteSessionDialog(this));
     }
-
-//    @Override
-//    public void updateInfo(Object sessionObject) {
-//        SessionDto sessionDto = (SessionDto) sessionObject;
-//
-//        sessionInfo.setLastOnline(sessionDto.getLastOnline());
-//
-//        lastOnline.setText(sessionInfo.getLastOnline().toString());
-//    }
 
     public void setSessionPane(AnchorPane sessionPane) {
         this.sessionPane = sessionPane;

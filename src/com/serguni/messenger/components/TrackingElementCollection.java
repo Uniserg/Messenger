@@ -26,7 +26,7 @@ public class TrackingElementCollection {
         longTrackingElements.get(userId).add(tracking);
     }
 
-    public void removeTemp(Long userId, Tracking tracking) {
+    public void removeTemp(Long userId, UserTracking tracking) {
         tempTrackingElements.get(userId).remove(tracking);
 
         if (tempTrackingElements.get(userId).isEmpty())

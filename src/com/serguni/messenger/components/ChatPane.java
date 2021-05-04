@@ -1,6 +1,5 @@
 package com.serguni.messenger.components;
 
-import com.serguni.messenger.Main;
 import com.serguni.messenger.controllers.UserChatMenuController;
 import com.serguni.messenger.dto.models.MessageDto;
 import com.serguni.messenger.dto.models.UserInfoDto;

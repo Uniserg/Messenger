@@ -28,10 +28,6 @@ public class SignUpDialogController {
     private Stage dialogStage;
     private Main main;
 
-//    public SignUpDialogController(Stage dialogStage) {
-//        this.dialogStage = dialogStage;
-//    }
-
     @FXML
     private void handleOk() {
         if (isInputValid()) {

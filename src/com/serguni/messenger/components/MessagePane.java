@@ -18,33 +18,17 @@ public class MessagePane {
         text = new Label();
         author = new Label();
 
-        AnchorPane.setRightAnchor(sendTime, 20.0);
-//        sendTime.setLayoutX(230);
-//        sendTime.setLayoutY(30);
+        AnchorPane.setRightAnchor(sendTime, 20.0);;
         sendTime.setText(messageDto.getSendTime().toString());
 
-//        text.setLayoutX(50);
         text.setLayoutY(30);
         AnchorPane.setLeftAnchor(text, 50.0);
         text.setMaxWidth(400);
         text.setWrapText(true);
         text.setText(messageDto.getText());
 
-//        String nickname;
-//
-//        if (Main.user.getNickname().equals(messageDto.getUserSenderNickname())) {
-//            nickname = "Me:";
-//            author.setStyle("-fx-text-fill: #ee686f");
-//        } else {
-//            nickname = messageDto.getUserSenderNickname();
-//            author.setStyle("-fx-text-fill: #6541cf");
-//        }
-//        author.setText(nickname);
-
         setMessageAuthor(messageDto.getUserSenderNickname(), author);
         AnchorPane.setLeftAnchor(author,20.0);
-//        author.setLayoutX(20);
-//        author.setLayoutX(30);
 
         anchorPane.setStyle("-fx-background-color: #1d1d1d");
         anchorPane.getChildren().addAll(sendTime, text, author);

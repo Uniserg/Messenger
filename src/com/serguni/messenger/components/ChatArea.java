@@ -2,8 +2,6 @@ package com.serguni.messenger.components;
 
 import com.serguni.messenger.dto.models.MessageDto;
 import com.serguni.messenger.dto.models.WatchedChatDto;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.util.HashMap;
@@ -31,9 +29,9 @@ public class ChatArea {
         }
     }
 
-//    public ScrollPane getScrollPane() {
-//        return scrollPane;
-//    }
+    public WatchedChatDto getWatchedChatDto() {
+        return watchedChatDto;
+    }
 
     public VBox getvBox() {
         return vBox;
@@ -42,4 +40,5 @@ public class ChatArea {
     public Map<Long, MessagePane> getMessages() {
         return messages;
     }
+
 }
