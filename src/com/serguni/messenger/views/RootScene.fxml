@@ -45,6 +45,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
+            <Button layoutY="-4.0" mnemonicParsing="false" onAction="#showAboutAuthorAndRef" prefHeight="0.0" prefWidth="97.0" styleClass="button-menu" text="About Author" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-1.0" />
          </children>
       </AnchorPane>
    </top>

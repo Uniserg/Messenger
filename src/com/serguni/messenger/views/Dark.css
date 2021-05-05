@@ -271,6 +271,14 @@
     -fx-font-size: 11pt;
 }
 
+.text-area {
+   -fx-text-fill: #b7b6ba;
+}
+
+.text-area .content {
+    -fx-background-color: #1d1d1d;
+}
+
 /*.text-area {*/
 /*    -fx-text-fill: #b7b6ba;*/
 /*    -fx-font-size: 11pt;*/

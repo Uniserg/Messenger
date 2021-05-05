@@ -1,14 +1,22 @@
 package com.serguni.messenger.controllers;
 
+import com.serguni.messenger.Main;
 import com.serguni.messenger.components.CustomWindow;
 import com.serguni.messenger.components.NativeStage;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +85,19 @@ public class RootSceneController {
         for (CustomWindow window : resizeDependElements) {
             window.cancelWindow();
         }
+    }
+
+    @FXML
+    public void showAboutAuthorAndRef() throws IOException {
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("file:resources/images/messengerfx.png"));
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("views/AboutAuthorAndRefWindow.fxml"));
+        Parent scene = loader.load();
+        stage.setScene(new Scene(scene));
+        stage.showAndWait();
     }
 
     @FXML
