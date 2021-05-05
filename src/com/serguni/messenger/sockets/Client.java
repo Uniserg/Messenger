@@ -97,7 +97,6 @@ public class Client {
 
                         } catch (IOException | ClassNotFoundException e) {
                             Platform.runLater(() -> main.showStartMenu());
-                            e.printStackTrace();
                             break;
                         }
                     }
@@ -143,7 +142,7 @@ public class Client {
     }
 
     public void foundUsers(Set<UserInfoDto> users) {
-        main.getUserChatMenuController().fillUserChart(users);
+        Platform.runLater(() ->main.getUserChatMenuController().fillUserChart(users));
     }
 
 //    public void updateTrackingUserInfo(UserInfoDto userInfoDto) {

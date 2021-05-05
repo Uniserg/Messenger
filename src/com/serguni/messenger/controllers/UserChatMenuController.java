@@ -111,19 +111,6 @@ public class UserChatMenuController {
     // USER INFO MENU
     @FXML
     private AnchorPane foundUserInfoMenu;
-    @FXML
-    private AnchorPane userInfoPane;
-    @FXML
-    private Circle foundUserInfoAvatar;
-    @FXML
-    private Label lastOnlineLabel;
-    @FXML
-    private Label foundUserInfoFullName;
-    @FXML
-    private Label foundUserInfoLastOnline;
-    @FXML
-    private Label foundUserInfoNickname;
-
     public static UserInfoDto selectedUser;
     // USER INFO MENU
 
@@ -131,8 +118,6 @@ public class UserChatMenuController {
     //SESSIONS MENU
     @FXML
     private AnchorPane sessionsMenu;
-    @FXML
-    private Label currentSessionLastOnline;
     @FXML
     private Label deviceAndOs;
     @FXML
@@ -156,7 +141,7 @@ public class UserChatMenuController {
 //    private static final Map<Long, UserTrackingImpl> USER_TRACKING_MAP = new HashMap<>();
     public static final Map<Long, Map<Long, SessionChart>> USERS_SESSIONS = new HashMap<>();
     public static final Map<Long, Object[]> CHAT_AREA_MAP = new HashMap<>();
-    private final Map<Long, UserInfoDto> USERS_MEM = new HashMap<>();
+    private static final Map<Long, UserInfoDto> USERS_MEM = new HashMap<>();
 //    public static final Set<UserInfoDto> TRACKING_USERS = new HashSet<>();
 
     private CustomWindow userChatMenuWindow;
@@ -195,9 +180,6 @@ public class UserChatMenuController {
     public void setMain(Main main) {
         this.main = main;
         this.main.client.setUserChatMenuController(this);
-
-        System.out.println(Main.user.getWatchedPrivateChats());
-        System.out.println(Main.user.getId());
         // ИНИЦИАЛИЗАЦИЯ ЧАТОВ
         for (Map.Entry<UserInfoDto, WatchedChatDto> wc: Main.user.getWatchedPrivateChats().entrySet()) {
 //            userChats.getChildren().add();
@@ -212,7 +194,7 @@ public class UserChatMenuController {
             //ДОБАВЛЕНИЕ СООБЩЕНИЙ
 
 
-            ChatPane chatPane = new ChatPane(watchedChatDto, wc.getKey(), this);
+            ChatPane chatPane = new ChatPane(watchedChatDto, userInfoDto, this);
 
             CHAT_AREA_MAP.put(wc.getKey().getId(), new Object[] {chatPane, new ChatArea(watchedChatDto)});
 
@@ -384,17 +366,20 @@ public class UserChatMenuController {
         Set<UserTrackingImpl> trackingElements = TRACKING_ELEMENT_COLLECTION.tempTrackingElements.get(userId);
         if (trackingElements != null) {
             for (UserTrackingImpl tracking : TRACKING_ELEMENT_COLLECTION.tempTrackingElements.get(userId)) {
-                tracking.updateFullName(lastName + " " + firstName);
+                tracking.updateFullName(lastName, firstName);
             }
         }
 
-        USERS_MEM.get(userId).setFirstName(firstName);
-        USERS_MEM.get(userId).setLastName(lastName);
+        UserInfoDto userInfoDto = USERS_MEM.get(userId);
+        if (userInfoDto != null) {
+            userInfoDto.setFirstName(firstName);
+            userInfoDto.setLastName(lastName);
+        }
 
         Set<UserTrackingImpl> longTracking = TRACKING_ELEMENT_COLLECTION.longTrackingElements.get(userId);
         if (longTracking != null) {
             for (UserTrackingImpl tracking : longTracking) {
-                tracking.updateFullName(lastName + " " + firstName);
+                tracking.updateFullName(lastName, firstName);
             }
         }
     }
@@ -468,16 +453,25 @@ public class UserChatMenuController {
         if (Main.user.getId() == userId) {
             Main.user.setAvatar(newAvatar);
             updateAvatarAnywhere();
+        } else {
+            UserInfoDto userInfoDto = USERS_MEM.get(userId);
+            if (userInfoDto != null) {
+                userInfoDto.setAvatar(newAvatar);
+            }
         }
+//        else if (selectedUser != null && userId == selectedUser.getId()) {
+//            UserInfoDto userInfoDto = USERS_MEM.get(userId);
+//            if (userInfoDto != null) {
+//                userInfoDto.setAvatar(newAvatar);
+//            }
+//        }
 
 //        USER_TRACKING_MAP.get(userId).updateAvatar(newAvatar);
-        if (userId == selectedUser.getId()) {
-            selectedUser.setAvatar(newAvatar);
-        }
-
-        USERS_MEM.get(userId).setAvatar(newAvatar);
+//        if (selectedUser != null && userId == selectedUser.getId()) {
+//        }
 
         Set<UserTrackingImpl> trackingElements = TRACKING_ELEMENT_COLLECTION.tempTrackingElements.get(userId);
+        System.out.println("ОБНОВЛЕНИЕ АВАТАРКИ ->" + trackingElements);
         if (trackingElements != null) {
             for (UserTrackingImpl tracking : trackingElements) {
                 tracking.updateAvatar(newAvatar);
@@ -497,12 +491,12 @@ public class UserChatMenuController {
     // FOUND USER MENU
     public void showFoundUserInfoMenu(UserInfoDto userInfoDto) {
         selectedUser = userInfoDto;
+        UserPane userPane = new UserPane(userInfoDto);
+        System.out.println(TRACKING_ELEMENT_COLLECTION.tempTrackingElements);
+        TRACKING_ELEMENT_COLLECTION.putToTemp(userInfoDto.getId(), userPane);
+        System.out.println(TRACKING_ELEMENT_COLLECTION.tempTrackingElements);
 
         Platform.runLater(() -> {
-
-            UserPane userPane = new UserPane(userInfoDto);
-            TRACKING_ELEMENT_COLLECTION.putToTemp(userInfoDto.getId(), userPane);
-
             foundUserInfoMenu.getChildren().set(0, userPane.getAnchorPane());
             foundUserInfoMenuWindow.showWindow();
 
@@ -586,6 +580,10 @@ public class UserChatMenuController {
         }
     }
 
+    public static void setSelectedUser(long selectedUserId) {
+        selectedUser = USERS_MEM.get(selectedUserId);
+    }
+
     @FXML
     public void handleShowChatArea() {
 //        friendsWindow.cancelWindow();
@@ -653,23 +651,20 @@ public class UserChatMenuController {
 
 
     public void fillUserChart(Set<UserInfoDto> users) {
-        Platform.runLater(() -> userChartBox.getChildren().clear());
+        userChartBox.getChildren().clear();
 
         if (users.isEmpty()) {
             searchUserWarning.setVisible(true);
         } else {
             searchUserWarning.setVisible(false);
             for (UserInfoDto userDto : users) {
-                System.out.println(userDto);
-                System.out.println((userDto.getLastName() + " " + userDto.getFirstName()).equals(" "));
-
                 UserChart userPane = new UserChart(userDto,this);
 
                 TRACKING_ELEMENT_COLLECTION.putToTemp(userDto.getId(), userPane);
                 System.out.println("ДОБАВЛЯЕМ В КОЛЛЕКЦИЮ В fillCartUser - 537 - UserChartMenu");
                 System.out.println(TRACKING_ELEMENT_COLLECTION.tempTrackingElements + " ЭТО ЖЕ MAP");
                 System.out.println(userDto.getId());
-                Platform.runLater(() -> userChartBox.getChildren().add(userPane.getAnchorPane()));
+                userChartBox.getChildren().add(userPane.getAnchorPane());
             }
         }
     }

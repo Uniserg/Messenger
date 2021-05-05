@@ -29,7 +29,7 @@ public abstract class UserTrackingImpl implements UserTracking {
         aboutMe = new Label();
 
         updateNickname(userInfoDto.getNickname());
-        updateFullName(userInfoDto.getLastName() + " " + userInfoDto.getFirstName());
+        updateFullName(userInfoDto.getLastName(), userInfoDto.getFirstName());
         updateAvatar(userInfoDto.getAvatar());
         updateAboutMe(userInfoDto.getAboutMe());
         updateLastOnline(userInfoDto.getLastOnline());
@@ -37,11 +37,17 @@ public abstract class UserTrackingImpl implements UserTracking {
 
     @Override
     public void updateNickname(String newNickname) {
+        userInfoDto.setNickname(newNickname);
         nickname.setText(newNickname);
     }
 
     @Override
-    public void updateFullName(String newFullName) {
+    public void updateFullName(String newLastName, String newFirstName) {
+        userInfoDto.setLastName(newLastName);
+        userInfoDto.setFirstName(newFirstName);
+
+        String newFullName = newLastName + " " + newFirstName;
+
         if (newFullName.equals(" ")) {
             fullName.setText(nickname.getText());
         } else {
@@ -56,6 +62,8 @@ public abstract class UserTrackingImpl implements UserTracking {
 
     @Override
     public void updateAvatar(byte[] newAvatar) {
+        userInfoDto.setAvatar(newAvatar);
+
         if (newAvatar != null) {
             ByteArrayInputStream bin = new ByteArrayInputStream(newAvatar);
             avatar.setFill(new ImagePattern(new Image(bin)));
@@ -66,6 +74,8 @@ public abstract class UserTrackingImpl implements UserTracking {
 
     @Override
     public void updateLastOnline(Date newLastOnline) {
+        userInfoDto.setLastOnline(newLastOnline);
+
         if (newLastOnline.equals(new Date(0))) {
             lastOnline.setText("Online");
         } else {

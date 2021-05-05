@@ -9,8 +9,6 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class ChatPane extends UserTrackingImpl {
-
-    private final UserInfoDto otherUser;
     private final AnchorPane anchorPane;
     private final Label messageLabel;
     private final Label dateLabel;
@@ -18,7 +16,6 @@ public class ChatPane extends UserTrackingImpl {
 
     public ChatPane(WatchedChatDto watchedChatDto, UserInfoDto otherUser, UserChatMenuController userChatMenuController) {
         super(otherUser);
-        this.otherUser = otherUser;
 
         System.out.println(watchedChatDto.getMessages());
 
@@ -36,13 +33,6 @@ public class ChatPane extends UserTrackingImpl {
         if (messageDto != null) {
 
             MessagePane.setMessageAuthor(messageDto.getUserSenderNickname(), author);
-//            String nicknameOther = messageDto.getUserSenderNickname();
-//            if (nicknameOther.equals(Main.user.getNickname())) {
-//                author.setText("Me: ");
-//            } else {
-//                author.setText(nicknameOther);
-//            }
-
             messageLabel.setText(messageDto.getText());
             dateLabel.setText(messageDto.getSendTime().toString());
         }
@@ -61,20 +51,12 @@ public class ChatPane extends UserTrackingImpl {
         fullName.setLayoutX(90);
         fullName.setLayoutY(20);
 
-//        aboutMe.setLayoutX(90);
-//        aboutMe.setLayoutY(60);
-//
-//        lastOnline.setLayoutX(120);
-//        lastOnline.setLayoutY(40);
-//
-//        nickname.setLayoutX(220);
-//        nickname.setLayoutY(70);
 
         anchorPane.setMinHeight(100);
         anchorPane.getChildren().addAll(avatar, fullName, messageLabel, dateLabel, author);
 
         anchorPane.setOnMouseClicked(mouseEvent -> {
-            UserChatMenuController.selectedUser = otherUser;
+            UserChatMenuController.setSelectedUser(otherUser.getId());
             userChatMenuController.handleShowChatArea();
         });
         anchorPane.setOnMouseEntered(e -> anchorPane.setStyle("-fx-background-color: #3a3a3a"));

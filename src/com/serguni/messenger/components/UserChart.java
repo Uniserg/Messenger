@@ -34,7 +34,7 @@ public class UserChart extends UserTrackingImpl {
         anchorPane.setMinHeight(100);
         anchorPane.getChildren().addAll(avatar, fullName, aboutMe, lastOnline, nickname);
 
-        Platform.runLater(() -> anchorPane.setOnMouseClicked(mouseEvent -> userChatMenuController.showFoundUserInfoMenu(userInfoDto)));
+        anchorPane.setOnMouseClicked(mouseEvent -> userChatMenuController.showFoundUserInfoMenu(this.userInfoDto));
 
         anchorPane.setOnMouseEntered(e -> anchorPane.setStyle("-fx-background-color: #3a3a3a"));
         anchorPane.setOnMouseExited(e -> anchorPane.setStyle("-fx-background-color: #1d1d1d"));
