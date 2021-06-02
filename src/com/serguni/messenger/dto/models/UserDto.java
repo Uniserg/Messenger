@@ -1,12 +1,12 @@
 package com.serguni.messenger.dto.models;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
 public class UserDto extends UserInfoDto {
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 1;
 
     private Set<SessionDto> sessions;

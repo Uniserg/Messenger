@@ -48,55 +48,73 @@ public class Client {
                             SocketMessage message = (SocketMessage) in.readObject();
                             System.out.println(message.getType());
 
+                            final Object[] body;
+
                             switch (message.getType()) {
-                                case SEARCH_USER -> foundUsers((Set<UserInfoDto>) message.getBody());
-
-                                case EDIT_NAME -> {
-                                    Object[] body = (Object[]) message.getBody();
+                                case SEARCH_USER:
+                                    foundUsers((Set<UserInfoDto>) message.getBody());
+                                    break;
+                                case EDIT_NAME:
+                                    body = (Object[]) message.getBody();
                                     editName((long)body[0], (String) body[1], (String) body[2]);
-                                }
+                                    break;
 
-                                case EDIT_AVATAR -> {
-                                    Object[] body = (Object[]) message.getBody();
+                                case EDIT_AVATAR:
+                                    body = (Object[]) message.getBody();
                                     editAvatar((long) body[0], (byte[]) body[1]);
-                                }
+                                    break;
 
-                                case EDIT_ABOUT_ME -> {
-                                    Object[] body = (Object[]) message.getBody();
+                                case EDIT_ABOUT_ME:
+                                    body = (Object[]) message.getBody();
                                     editAboutMe((long) body[0], (String) body[1]);
-                                }
+                                    break;
 
-                                case UPDATE_LAST_ONLINE_TO_TRACKING_USERS -> {
-                                    Object[] body = (Object[]) message.getBody();
+                                case UPDATE_LAST_ONLINE_TO_TRACKING_USERS:
+                                    body = (Object[]) message.getBody();
                                     updateLastOnlineOfTrackedUsers((long) body[0], (Date) body[1]);
-                                }
+                                    break;
 
-                                case UPDATE_LAST_ONLINE_TO_OTHER_USER_SESSIONS -> {
-                                    Object[] body = (Object[]) message.getBody();
+                                case UPDATE_LAST_ONLINE_TO_OTHER_USER_SESSIONS:
+                                    body = (Object[]) message.getBody();
                                     updateLastOnlineOfOtherSession((long) body[0], (Date) body[1]);
-                                }
-
+                                    break;
 
 //                                case UPDATE_TRACKING_USER -> updateTrackingUserInfo((UserInfoDto) message.getBody());
-                                case ADD_NEW_SESSION -> userChatMenuController.addSessionsInfo((SessionDto) message.getBody());
-                                case DELETE_OTHER_SESSION -> userChatMenuController.deleteOtherSession((long) message.getBody());
+                                case ADD_NEW_SESSION:
+                                    userChatMenuController.addSessionsInfo((SessionDto) message.getBody());
+                                    break;
+                                case DELETE_OTHER_SESSION:
+                                    userChatMenuController.deleteOtherSession((long) message.getBody());
+                                    break;
 
-                                case CHAT_MESSAGE ->  {
-                                    Object[] objects = (Object[]) message.getBody();
-                                    Platform.runLater(() -> userChatMenuController.addNewMessage((long) objects[0], (MessageDto) objects[1]));
-                                }
+//                                case ADD_NEW_SESSION -> userChatMenuController.addSessionsInfo((SessionDto) message.getBody());
+//                                case DELETE_OTHER_SESSION -> userChatMenuController.deleteOtherSession((long) message.getBody());
 
-                                case CREATE_NEW_CHAT -> {
-                                    Object[] objects = (Object[]) message.getBody();
-                                    Platform.runLater(() -> userChatMenuController.addNewChat((UserInfoDto) objects[0], (WatchedChatDto) objects[1]));
-                                }
+                                case CHAT_MESSAGE:
+                                    body = (Object[]) message.getBody();
+                                    Platform.runLater(() -> userChatMenuController.addNewMessage((long) body[0], (MessageDto) body[1]));
+                                    break;
+
+                                case CREATE_NEW_CHAT:
+                                    body = (Object[]) message.getBody();
+                                    Platform.runLater(() -> userChatMenuController.addNewChat((UserInfoDto) body[0], (WatchedChatDto) body[1]));
+                                    break;
+//                                case CHAT_MESSAGE ->  {
+//                                    Object[] objects = (Object[]) message.getBody();
+//                                    Platform.runLater(() -> userChatMenuController.addNewMessage((long) objects[0], (MessageDto) objects[1]));
+//                                }
+//
+//                                case CREATE_NEW_CHAT -> {
+//                                    Object[] objects = (Object[]) message.getBody();
+//                                    Platform.runLater(() -> userChatMenuController.addNewChat((UserInfoDto) objects[0], (WatchedChatDto) objects[1]));
+//                                }
 
 //                                case CREATE_NEW_CHAT -> userChatMenuController.addWatchedChat((WatchedChatDto) message.getBody());
 //                                case EDIT_AVATAR -> userChatMenuController.updateUserInfo((UserInfoDto) message.getBody());
                             }
 
                         } catch (IOException | ClassNotFoundException e) {
-                            Platform.runLater(() -> main.showStartMenu());
+                            Platform.runLater(() -> main.exit());
                             break;
                         }
                     }
@@ -138,7 +156,7 @@ public class Client {
     }
 
     private void updateLastOnlineOfOtherSession(long sessionId, Date newLastOnline) {
-        Platform.runLater(() -> userChatMenuController.updateLastOnlineOfOtherSession(main.user.getId(), sessionId, newLastOnline));
+        Platform.runLater(() -> userChatMenuController.updateLastOnlineOfOtherSession(Main.user.getId(), sessionId, newLastOnline));
     }
 
     public void foundUsers(Set<UserInfoDto> users) {

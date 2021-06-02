@@ -19,7 +19,7 @@ public class ValidationDialogController {
     @FXML
     private TextField keyField;
     private Stage dialogStage;
-    private UserDto user;
+    private long userId;
     private Main main;
 
     @FXML
@@ -53,7 +53,7 @@ public class ValidationDialogController {
 
             Gson gson = new Gson();
 
-            requestUtil.setJson(gson.toJson(new SessionContext(user.getId(), keyField.getText(), session)));
+            requestUtil.setJson(gson.toJson(new SessionContext(userId, keyField.getText(), session)));
             requestUtil.run();
 
             if (requestUtil.getResponseCode() == 200) {
@@ -84,8 +84,8 @@ public class ValidationDialogController {
         this.dialogStage = dialogStage;
     }
 
-    public void setUser(UserDto user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public void setMain(Main main) {

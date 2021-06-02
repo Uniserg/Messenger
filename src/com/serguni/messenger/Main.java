@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * Главный класс запуска. В нем содержатся методы для открытия окон.
+ *
+ */
 public class Main extends Application {
 
     private Stage primaryStage;
@@ -27,6 +31,8 @@ public class Main extends Application {
     public SessionDto session;
     public static UserDto user;
     public Client client;
+    public static String SERVER_SOCKET_ADDRESS = "localhost";
+    public static int SERVER_SOCKET_PORT = 8081;
 
     private UserChatMenuController userChatMenuController;
 
@@ -40,11 +46,11 @@ public class Main extends Application {
 
         this.primaryStage = nativeStage.getStage();
 
-        this.primaryStage.setMinWidth(370);
-        this.primaryStage.setMinHeight(510);
+        this.primaryStage.setMinWidth(440);
+        this.primaryStage.setMinHeight(540);
 
-        curHeight = 510;
-        curWidth = 370;
+        curHeight = 540;
+        curWidth = 440;
         this.primaryStage.setWidth(curWidth);
         this.primaryStage.setHeight(curHeight);
 
@@ -55,8 +61,7 @@ public class Main extends Application {
     public void login() {
 
         try {
-            Socket socket = new Socket("localhost", 8081);
-//            OutputStream os = socket.getOutputStream();
+            Socket socket = new Socket(SERVER_SOCKET_ADDRESS, SERVER_SOCKET_PORT);
             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
             out.writeObject(sessionCookie);
@@ -65,10 +70,8 @@ public class Main extends Application {
             ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             SocketMessage message = (SocketMessage) in.readObject();
 
-            if (message.getType() != SocketMessage.MessageType.LOGIN){
-                return;
-            }
-            if (message.getBody() == null) {
+            if (message.getType() != SocketMessage.MessageType.LOGIN ||
+                    message.getBody() == null){
                 return;
             }
 
@@ -91,6 +94,20 @@ public class Main extends Application {
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Сервер не отвечает!");
+            e.printStackTrace();
+        }
+    }
+
+    public void exit() {
+        UserChatMenuController.CHAT_AREA_MAP.clear();
+        UserChatMenuController.USERS_SESSIONS.clear();
+        UserChatMenuController.TRACKING_ELEMENT_COLLECTION.longTrackingElements.clear();
+        UserChatMenuController.TRACKING_ELEMENT_COLLECTION.tempTrackingElements.clear();
+        UserChatMenuController.USERS_MEM.clear();
+        showStartMenu();
+        try {
+            client.getSocket().close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -171,7 +188,7 @@ public class Main extends Application {
         }
     }
 
-    public void showValidationKeyDialog(Stage ownerStage, UserDto user) {
+    public void showValidationKeyDialog(Stage ownerStage, long userId) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("views/ValidationDialog.fxml"));
 
@@ -192,7 +209,7 @@ public class Main extends Application {
             ValidationDialogController validationController = loader.getController();
 
             validationController.setDialogStage(validationKeyStage);
-            validationController.setUser(user);
+            validationController.setUserId(userId);
             validationController.setMain(this);
 
             validationKeyStage.showAndWait();
@@ -218,9 +235,6 @@ public class Main extends Application {
 
             Node signUpDialog = loader.load();
             nativeStage.setScene(signUpDialog);
-
-//            Scene signUpScene = new Scene(signUpDialog);
-//            signUpStage.setScene(signUpScene);
 
             SignUpDialogController controller = loader.getController();
             controller.setDialogStage(signUpStage);

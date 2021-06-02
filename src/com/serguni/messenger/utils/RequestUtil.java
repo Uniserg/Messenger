@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class RequestUtil implements Runnable {
 
+//    private static final String ROOT_URL = "http://localhost:8080";
     private static final String ROOT_URL = "http://localhost:8080";
     private static final int TIMEOUT = 5000;
     private Boolean disconnect = false;

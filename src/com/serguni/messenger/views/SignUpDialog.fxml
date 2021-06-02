@@ -16,7 +16,7 @@
    <top>
       <StackPane prefHeight="0.0" prefWidth="600.0" styleClass="context-menu" stylesheets="@Dark.css" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="83.0" prefWidth="237.0" styleClass="label-header" stylesheets="@Dark.css" text="Sign Up">
+            <Label alignment="CENTER" prefHeight="93.0" prefWidth="361.0" styleClass="label-header" stylesheets="@Dark.css" text="Sign Up">
                <font>
                   <Font size="54.0" />
                </font>

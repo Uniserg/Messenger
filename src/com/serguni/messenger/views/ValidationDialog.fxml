@@ -12,7 +12,7 @@
 
 <StackPane styleClass="background" stylesheets="@Dark.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.ValidationDialogController">
    <children>
-      <GridPane>
+      <GridPane styleClass="background">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,10 +34,10 @@
             <Insets bottom="50.0" right="30.0" />
          </StackPane.margin>
       </GridPane>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar prefHeight="40.0" prefWidth="227.0" styleClass="background">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleOk" styleClass="button-action" text="OK" />
-            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="33.0" prefWidth="107.0" styleClass="button-action" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="33.0" prefWidth="113.0" styleClass="button-action" text="Cancel" />
         </buttons>
          <StackPane.margin>
             <Insets left="40.0" right="40.0" top="120.0" />

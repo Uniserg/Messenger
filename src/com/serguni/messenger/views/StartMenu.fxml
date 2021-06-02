@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="370.0" styleClass="background" stylesheets="@Dark.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.StartMenuController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="420.0" styleClass="background" stylesheets="@Dark.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.serguni.messenger.controllers.StartMenuController">
    <top>
       <StackPane prefHeight="100.0" prefWidth="400.0" styleClass="context-menu" stylesheets="@Dark.css" BorderPane.alignment="CENTER">
          <children>
@@ -28,7 +28,7 @@
                <children>
                   <Label contentDisplay="RIGHT" text="Login:         ">
                      <graphic>
-                        <TextField fx:id="loginField" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="loginField" onKeyPressed="#handleEnterPressed" />
                      </graphic>
                   </Label>
                   <Label fx:id="notFoundUserLabel" styleClass="label-warning" text="User not found" visible="false">

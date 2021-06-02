@@ -46,8 +46,9 @@ public class SignUpDialogController {
 
             //ОТВЕТ ОТ СЕРВЕРА
             if (requestUtil.getResponseCode() == 201) {
-                UserDto user = new Gson().fromJson(requestUtil.getResponse(), UserDto.class);
-                main.showValidationKeyDialog(dialogStage, user);
+                System.out.println("ID нового = " + requestUtil.getResponse());
+                long userId = Long.parseLong(requestUtil.getResponse());
+                main.showValidationKeyDialog(dialogStage, userId);
             } else {
                 warningLabel.setText(requestUtil.getResponse());
                 warningLabel.setVisible(true);

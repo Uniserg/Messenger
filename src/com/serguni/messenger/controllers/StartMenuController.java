@@ -52,28 +52,9 @@ public class StartMenuController {
 
             if (requestUtil.getResponseCode() == 200) {
                 notFoundUserLabel.setVisible(false);
-//                System.out.println(requestUtil.getResponse());
-                UserDtoJson userDtoJson = new Gson().fromJson(requestUtil.getResponse(), UserDtoJson.class);
+                long userId = Long.parseLong(requestUtil.getResponse());
 
-                byte[] avatar = null;
-
-                if (userDtoJson.getAvatar() != null) {
-                    avatar = userDtoJson.getAvatar().getBytes(StandardCharsets.UTF_8);
-                }
-
-                UserDto userDto = new UserDto(
-                        userDtoJson.getId(),
-                        userDtoJson.getNickname(),
-                        userDtoJson.getEmail(),
-                        userDtoJson.getFirstName(),
-                        userDtoJson.getLastName(),
-                        userDtoJson.getAboutMe(),
-                        avatar,
-                        new Date(0)
-                );
-
-//                UserDto user = new Gson().fromJson(requestUtil.getResponse(), UserDto.class);
-                main.showValidationKeyDialog(null, userDto);
+                main.showValidationKeyDialog(null, userId);
             } else {
                 notFoundUserLabel.setVisible(true);
                 System.out.println(requestUtil.getResponseCode());

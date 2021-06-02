@@ -141,7 +141,7 @@ public class UserChatMenuController {
 //    private static final Map<Long, UserTrackingImpl> USER_TRACKING_MAP = new HashMap<>();
     public static final Map<Long, Map<Long, SessionChart>> USERS_SESSIONS = new HashMap<>();
     public static final Map<Long, Object[]> CHAT_AREA_MAP = new HashMap<>();
-    private static final Map<Long, UserInfoDto> USERS_MEM = new HashMap<>();
+    public static final Map<Long, UserInfoDto> USERS_MEM = new HashMap<>();
 //    public static final Set<UserInfoDto> TRACKING_USERS = new HashSet<>();
 
     private CustomWindow userChatMenuWindow;
@@ -180,6 +180,9 @@ public class UserChatMenuController {
     public void setMain(Main main) {
         this.main = main;
         this.main.client.setUserChatMenuController(this);
+
+//        scrollPane.vvalueProperty().bind(mainGrid.heightProperty());
+
         // ИНИЦИАЛИЗАЦИЯ ЧАТОВ
         for (Map.Entry<UserInfoDto, WatchedChatDto> wc: Main.user.getWatchedPrivateChats().entrySet()) {
 //            userChats.getChildren().add();
@@ -197,6 +200,8 @@ public class UserChatMenuController {
             ChatPane chatPane = new ChatPane(watchedChatDto, userInfoDto, this);
 
             CHAT_AREA_MAP.put(wc.getKey().getId(), new Object[] {chatPane, new ChatArea(watchedChatDto)});
+            System.out.println("ПРОВЕРКА ПРИ ДОБАВЛЕНИИ ВИДИМЫХ ЧАТОВ");
+            System.out.println(CHAT_AREA_MAP);
 
             TRACKING_ELEMENT_COLLECTION.putToLong(wc.getKey().getId(), chatPane);
             System.out.println("ДОБАВЛЯЕМ В КОЛЛЕКЦИЮ В setMain - инициализация чатов - 537 - UserChartMenu");
@@ -538,11 +543,13 @@ public class UserChatMenuController {
         ChatPane chatPane = new ChatPane(watchedChatDto, userInfoDto, this);
 
         CHAT_AREA_MAP.put(userInfoDto.getId(), new Object[]{chatPane, chatArea});
+        USERS_MEM.put(userInfoDto.getId(), userInfoDto);
 
         TRACKING_ELEMENT_COLLECTION.putToLong(userInfoDto.getId(), chatPane);
         userChats.getChildren().add(chatPane.getChatPane());
 
         scrollMessages.setContent(chatArea.getvBox());
+
 //        chatContent.getChildren().set(0, chatArea.getScrollPane());
     }
 
@@ -600,10 +607,13 @@ public class UserChatMenuController {
         TRACKING_ELEMENT_COLLECTION.putToLong(selectedUser.getId(), userPane);
         chatArea.getChildren().set(0, userPane.getAnchorPane());
         if (CHAT_AREA_MAP.containsKey(selectedUser.getId())) {
+            System.out.println("ОТКУДА У ПОЛЬЗОВАТЕЛЯ ЧУЖИЕ ЧАТЫ???");
+            System.out.println(CHAT_AREA_MAP);
             Object[] objects = CHAT_AREA_MAP.get(selectedUser.getId());
             ChatArea chatArea = (ChatArea) objects[1];
 
             scrollMessages.setContent(chatArea.getvBox());
+            scrollMessages.vvalueProperty().bind(chatArea.getvBox().heightProperty());
 //            chatContent.getChildren().set(0, chatArea.getScrollPane());
         }
 
@@ -670,10 +680,11 @@ public class UserChatMenuController {
     }
 
     @FXML
-    private void handleLogout() throws IOException {
+    private void handleLogout() {
         main.client.sendSocketMessage(new SocketMessage(MessageType.LOGOUT, null));
-        main.client.getSocket().close();
-        main.showStartMenu();
+        main.exit();
+//        main.client.getSocket().close();
+//        main.showStartMenu();
     }
 
 //    @FXML
@@ -828,7 +839,7 @@ public class UserChatMenuController {
         Stage chooseWindow = new Stage();
 
         fileChooser.setTitle("Select Image");
-        fileChooser.setInitialDirectory(new File(System.getenv("HOMEPATH")));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png"),

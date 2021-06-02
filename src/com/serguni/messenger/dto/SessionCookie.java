@@ -1,11 +1,11 @@
 package com.serguni.messenger.dto;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 
 public class SessionCookie implements Serializable {
 
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 1;
     private long sessionId;
     private String cookie;

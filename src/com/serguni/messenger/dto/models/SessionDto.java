@@ -1,12 +1,12 @@
 package com.serguni.messenger.dto.models;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 public class SessionDto implements Serializable {
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 1;
 
     private Long id;

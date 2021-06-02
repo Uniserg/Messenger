@@ -1,13 +1,13 @@
 package com.serguni.messenger.dto.models;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import java.util.SortedSet;
 
 public class WatchedChatDto implements Serializable {
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 1;
 
     public static class WatchedChatPK implements Serializable {
@@ -42,8 +42,8 @@ public class WatchedChatDto implements Serializable {
     private Date syncTime;
     private boolean isAdmin;
     private boolean isBlocked;
-    private SortedSet<MessageDto> messages;
-    private SortedSet<UserInfoDto> users;
+    private final SortedSet<MessageDto> messages;
+    private final SortedSet<UserInfoDto> users;
 
     public WatchedChatDto(long chatId,
                           long userId,

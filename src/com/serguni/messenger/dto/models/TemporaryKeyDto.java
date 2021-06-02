@@ -1,11 +1,11 @@
 package com.serguni.messenger.dto.models;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 public class TemporaryKeyDto implements Serializable {
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 1;
 
     private long id;

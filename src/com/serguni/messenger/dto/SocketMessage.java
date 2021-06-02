@@ -1,6 +1,6 @@
 package com.serguni.messenger.dto;
 
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -23,7 +23,7 @@ public class SocketMessage implements Serializable {
         CHAT_MESSAGE
     }
 
-    @Serial
+//    @Serial
     private static final long serialVersionUID = 3;
 
     private MessageType type;
