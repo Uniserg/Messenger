@@ -1,8 +1,5 @@
 package com.serguni.messenger.controllers;
 
-import com.google.gson.Gson;
-import com.serguni.messenger.dto.models.UserDto;
-import com.serguni.messenger.dto.models.UserDtoJson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -13,8 +10,6 @@ import com.serguni.messenger.utils.RequestUtil;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
 
 public class StartMenuController {
     @FXML

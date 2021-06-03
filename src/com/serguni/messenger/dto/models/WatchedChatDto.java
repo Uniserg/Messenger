@@ -1,13 +1,11 @@
 package com.serguni.messenger.dto.models;
 
-//import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import java.util.SortedSet;
 
 public class WatchedChatDto implements Serializable {
-//    @Serial
     private static final long serialVersionUID = 1;
 
     public static class WatchedChatPK implements Serializable {

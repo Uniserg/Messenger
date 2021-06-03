@@ -464,16 +464,6 @@ public class UserChatMenuController {
                 userInfoDto.setAvatar(newAvatar);
             }
         }
-//        else if (selectedUser != null && userId == selectedUser.getId()) {
-//            UserInfoDto userInfoDto = USERS_MEM.get(userId);
-//            if (userInfoDto != null) {
-//                userInfoDto.setAvatar(newAvatar);
-//            }
-//        }
-
-//        USER_TRACKING_MAP.get(userId).updateAvatar(newAvatar);
-//        if (selectedUser != null && userId == selectedUser.getId()) {
-//        }
 
         Set<UserTrackingImpl> trackingElements = TRACKING_ELEMENT_COLLECTION.tempTrackingElements.get(userId);
         System.out.println("ОБНОВЛЕНИЕ АВАТАРКИ ->" + trackingElements);
@@ -509,36 +499,7 @@ public class UserChatMenuController {
         });
     }
 
-//    public void addWatchedChat(WatchedChatDto watchedChatDto) {
-//
-//        long chatId = watchedChatDto.getChatId();
-//
-//        enterMessageTextArea.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-//            if (keyEvent.getCode() == KeyCode.ENTER) {
-//                try {
-//                    enterMessageTextArea.deletePreviousChar();
-//                    MessageDto messageDto = new MessageDto(enterMessageTextArea.getText(),
-//                            chatId,
-//                            main.user.getId());
-//
-//                    System.out.println(enterMessageTextArea.getText());
-//                    main.client.out.writeObject(new SocketMessage(MessageType.CHAT_MESSAGE, messageDto));
-//                    enterMessageTextArea.clear();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        if (main.getPrimaryStage().getWidth() < 370 * 2) {
-//            chatAreaWindow.showWindow();
-//            chatAreaWindow.getWindow().setMinWidth(main.getPrimaryStage().getWidth());
-//        }
-//    }
-
     public void addNewChat(UserInfoDto userInfoDto, WatchedChatDto watchedChatDto) {
-
-        System.out.println("МЫ ТУТ НО ПОЧЕМУ НИЧЕГО НЕ ДОБАВИЛОСЬ?");
         ChatArea chatArea = new ChatArea(watchedChatDto);
         ChatPane chatPane = new ChatPane(watchedChatDto, userInfoDto, this);
 
@@ -549,8 +510,6 @@ public class UserChatMenuController {
         userChats.getChildren().add(chatPane.getChatPane());
 
         scrollMessages.setContent(chatArea.getvBox());
-
-//        chatContent.getChildren().set(0, chatArea.getScrollPane());
     }
 
     public void addNewMessage(long otherUserId, MessageDto messageDto) {
@@ -561,20 +520,7 @@ public class UserChatMenuController {
         ChatPane chatPane = (ChatPane) objects[0];
 
         MessagePane.setMessageAuthor(messageDto.getUserSenderNickname(), chatPane.getAuthor());
-//
-//        String nickname;
-//
-//        if (Main.user.getNickname().equals(messageDto.getUserSenderNickname())) {
-//            nickname = "Me:";
-//            chatPane.getAuthor().setStyle("-fx-text-fill: #ee686f");
-//        } else {
-//            nickname = messageDto.getUserSenderNickname();
-//            chatPane.getAuthor().setStyle("-fx-text-fill: #6541cf");
-//        }
-//
-//        chatPane.getAuthor().setText(nickname);
 
-//        chatPane.getAuthor().setText(messageDto.getUserSenderNickname());
         chatPane.getDateLabel().setText(messageDto.getSendTime().toString());
         chatPane.getMessageLabel().setText(messageDto.getText());
 
@@ -593,10 +539,6 @@ public class UserChatMenuController {
 
     @FXML
     public void handleShowChatArea() {
-//        friendsWindow.cancelWindow();
-//        chatAreaWindow.showWindow();
-//        chatAreaWindow.setParent(userChatMenuWindow);
-
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setStyle("-fx-background-color: #1d1d1d");
         scrollMessages.setContent(new AnchorPane());
@@ -634,32 +576,14 @@ public class UserChatMenuController {
                 }
             }
         });
-//        enterMessageTextArea.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-//        });
-//        WatchedChatDto watchedChatDto = main.user.getWatchedPrivateChats().get(selectedUser);
-//        if (watchedChatDto == null) {
-//            main.client.out.writeObject(new SocketMessage(MessageType.CREATE_NEW_CHAT, selectedUser));
-//            return;
-//        }
-
-        //ДОБАВИТЬ LISTENER ЕСЛИ размер ОКНА СТАНОВИТСЯ БОЛЬШЕ
-
-//        chatAreaWindo;
     }
 
     @FXML
     private void handleCloseFoundUserMenu() {
         foundUserInfoMenuWindow.cancelWindow();
-//        UserTrackingImpl userTracking = USER_TRACKING_MAP.get(selectedUser.getId());
-//
-//        userTracking.setPrevWindow();
-//        UserChart.TranslateToUserChart(userTracking, this);
     }
 
     // FOUND USER MENU
-
-
-
     public void fillUserChart(Set<UserInfoDto> users) {
         userChartBox.getChildren().clear();
 
@@ -683,14 +607,7 @@ public class UserChatMenuController {
     private void handleLogout() {
         main.client.sendSocketMessage(new SocketMessage(MessageType.LOGOUT, null));
         main.exit();
-//        main.client.getSocket().close();
-//        main.showStartMenu();
     }
-
-//    @FXML
-//    private void handleBack() {
-//        cancelWindow(windowsStack.pop());
-//    }
 
     @FXML
     private void handleCancelSettings() {
@@ -732,8 +649,6 @@ public class UserChatMenuController {
         window.setCancelSpecFunc(() -> {
             editProfileScrollPane.setDisable(false);
             backEditProfileButton.setDisable(false);
-
-//            settingsMenu.getChildren().get(0).setDisable(false);
         });
 
         window.showWindow();
@@ -905,7 +820,6 @@ public class UserChatMenuController {
 
 
     public void handleEnterPressed(KeyEvent keyEvent) {
-//        System.out.println(keyEvent.getCode());
         if (keyEvent.getCode() == KeyCode.ENTER) {
             handleSearchUsers();
         }

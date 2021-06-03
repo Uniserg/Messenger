@@ -38,7 +38,7 @@ public class Main extends Application {
 
     private final static String SESSION_PATH = "data/cookie/";
     private final static String COOKIE_FILE = SESSION_PATH + "cookie.msfx";
-    private final static String USER_CACHE_FILE = "data/cookie/" + "cache.msfx";
+//    private final static String USER_CACHE_FILE = "data/cookie/" + "cache.msfx";
 
     @Override
     public void start(Stage primaryStage) {
@@ -76,6 +76,7 @@ public class Main extends Application {
             }
 
             user = (UserDto) message.getBody();
+            System.out.println(user);
 
             for (SessionDto sessionDto : user.getSessions()) {
                 if (sessionDto.getId() == sessionCookie.getSessionId()) {
@@ -119,14 +120,7 @@ public class Main extends Application {
 
             sessionCookie = (SessionCookie) objectCookieIs.readObject();
 
-            FileInputStream sessionIs = new FileInputStream(USER_CACHE_FILE);
-            ObjectInputStream objectSessionIs = new ObjectInputStream(sessionIs);
-
-            user = (UserDto) objectSessionIs.readObject();
-//            session = sessionDto;
-
             objectCookieIs.close();
-            objectSessionIs.close();
 
             login();
         } catch (IOException | ClassNotFoundException e) {
@@ -170,19 +164,6 @@ public class Main extends Application {
             userChatMenuController = loader.getController();
             userChatMenuController.setMain(this);
 
-//            AnchorPane userMenuBack = (AnchorPane) ((AnchorPane) ((AnchorPane) userMenu.getChildrenUnmodifiable().get(0)).getChildren().get(0)).getChildren().get(0);
-//
-//            HBox hBox = (HBox) userMenuBack.getChildrenUnmodifiable().get(0);
-//            ScrollPane scrollPane = (ScrollPane) hBox.getChildrenUnmodifiable().get(0);
-//            VBox vBox = (VBox) scrollPane.getContent();
-//            ObservableList<Node> chats = vBox.getChildren();
-//
-//
-//            for (int i = 0; i < 4; i ++) {
-//                chats.add(0, new ChatPane().getChatPane());
-//            }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -223,7 +204,6 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("views/SignUpDialog.fxml"));
 
         try {
-//            Stage signUpStage = new Stage();
             NativeStage nativeStage = new NativeStage();
             Stage signUpStage = nativeStage.getStage();
 
@@ -257,20 +237,7 @@ public class Main extends Application {
         if (!cookieFile.exists()) {
             cookieFile.createNewFile();
         }
-
-        File sessionFile = new File(USER_CACHE_FILE);
-        if (!sessionFile.exists()) {
-            sessionFile.createNewFile();
-        }
     }
-
-//    public void saveSession() {
-//        try {
-//            normalPath();
-//
-//        }
-//
-//    }
 
     public void saveCookie() {
         try {
@@ -280,12 +247,6 @@ public class Main extends Application {
             ObjectOutputStream objectCookieOs = new ObjectOutputStream(cookieOs);
 
             objectCookieOs.writeObject(sessionCookie);
-
-            FileOutputStream sessionOs = new FileOutputStream(USER_CACHE_FILE);
-            ObjectOutputStream objectSessionOs = new ObjectOutputStream(sessionOs);
-
-            objectSessionOs.writeObject(user);
-
         } catch (IOException ignored) {
 
         }

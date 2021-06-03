@@ -1,12 +1,10 @@
 package com.serguni.messenger.dto.models;
 
-//import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 public class MessageDto implements Serializable {
-//    @Serial
     private static final long serialVersionUID = 1;
 
     private long id;
@@ -18,41 +16,11 @@ public class MessageDto implements Serializable {
     private Set<MessageDto> redirectedMessages;
     private Set<ContentDto> contents;
 
-//    public MessageDto(Message message) {
-//        id = message.getId();
-//        sendTime = message.getSendTime();
-//        text = message.getText();
-//        readTime = message.getReadTime();
-//        chat = new ChatDto(message.getChat());
-//        user = new UserDto(message.getUser());
-//        redirectedMessages = new HashSet<>();
-//        for (Message redirectedMessage : message.getRedirectedMessages()){
-//            redirectedMessages.add(new MessageDto(redirectedMessage));
-//        }
-//        contents = new HashSet<>();
-//        for (Content content : message.getContents()) {
-//            contents.add(new ContentDto(content));
-//        }
-//    }
-
     public MessageDto(String text, long chatId, String userSenderNickname) {
         this.text = text;
         this.chatId = chatId;
         this.userSenderNickname = userSenderNickname;
     }
-
-
-//    public MessageDto(long id,
-//                      Date sendTime,
-//                      String text,
-//                      Date readTime,
-//                      UserInfoDto user) {
-//        this.id = id;
-//        this.sendTime = sendTime;
-//        this.text = text;
-//        this.readTime = readTime;
-//        this.user = user;
-//    }
 
     public long getId() {
         return id;
